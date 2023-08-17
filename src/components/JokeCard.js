@@ -12,6 +12,7 @@ import { AppThemeContext } from "../context/AppThemeContext";
 import { shadow } from "../styles/shadow";
 
 import LottieView from "lottie-react-native";
+import { AppCard } from "./AppCard";
 
 export const JokeCard = ({ setup, delivery, isLoading, shareJoke }) => {
   const { colors } = useTheme();
@@ -98,24 +99,5 @@ export const JokeCard = ({ setup, delivery, isLoading, shareJoke }) => {
     </View>
   );
 
-  return (
-    <View
-      style={[
-        {
-          backgroundColor: colors.card,
-          minHeight: 200,
-          borderRadius: 8,
-          justifyContent: "center",
-          alignItems: "center",
-          borderWidth: 1,
-          borderColor: colors.border,
-          paddingVertical: 24,
-          paddingHorizontal: 24,
-        },
-        theme === "light" ? shadow : null,
-      ]}
-    >
-      {isLoading ? <LoadingView /> : <LoadedView />}
-    </View>
-  );
+  return <AppCard>{isLoading ? <LoadingView /> : <LoadedView />}</AppCard>;
 };

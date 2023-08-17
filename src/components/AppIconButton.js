@@ -20,7 +20,7 @@ export const AppIconButton = ({ icon, onPress, filled }) => {
         alignItems: "center",
         justifyContent: "center",
         marginHorizontal: 8,
-        borderWidth: 0.5,
+        borderWidth: filled ? 0.5 : 0,
         borderColor: colors.border,
       }}
       activeOpacity={0.7}

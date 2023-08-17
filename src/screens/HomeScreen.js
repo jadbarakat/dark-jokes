@@ -21,10 +21,11 @@ import {
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 
 // import LottieView from "lottie-react-native";
-import { useTheme } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { AppScreen } from "../components/AppScreen";
 
 export const HomeScreen = () => {
+  const navigation = useNavigation();
   const theme = useContext(AppThemeContext);
   const setTheme = useContext(AppThemeUpdateContext);
   const isDark = theme === "dark";
@@ -101,7 +102,7 @@ export const HomeScreen = () => {
         <View
           style={{
             flex: 0.1,
-            alignItems: "center",
+            alignItems: "flex-start",
             justifyContent: "center",
             flexDirection: "row",
           }}
@@ -126,9 +127,8 @@ export const HomeScreen = () => {
         <View
           style={{
             flex: 0.7,
-            justifyContent: "center",
+            paddingTop: 80,
             height: "100%",
-            padding: 16,
           }}
         >
           <JokeCard
@@ -142,7 +142,6 @@ export const HomeScreen = () => {
           style={{
             flex: 0.2,
             width: "100%",
-            paddingHorizontal: 16,
             justifyContent: "center",
           }}
         >
