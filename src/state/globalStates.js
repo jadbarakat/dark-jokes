@@ -1,5 +1,7 @@
 // imports
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { atom } from "jotai";
+import { atomWithStorage, createJSONStorage } from "jotai/utils";
 import { Appearance } from "react-native";
 
 // global state for app theme
@@ -7,4 +9,5 @@ const colorScheme = Appearance.getColorScheme();
 export const themeAtom = atom(colorScheme);
 
 // global state for favourite jokes
-export const favouritesAtom = atom([]);
+const storage = createJSONStorage(() => AsyncStorage);
+export const favouritesAtom = atomWithStorage("favourites", [], storage);

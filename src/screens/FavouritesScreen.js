@@ -9,12 +9,15 @@ import { useTheme } from "@react-navigation/native";
 import { useAtom } from "jotai";
 
 import { favouritesAtom } from "../state/globalStates";
+import { AppButton } from "../components/AppButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const FavouritesScreen = () => {
   const [favourites, setFavourites] = useAtom(favouritesAtom);
   const { colors } = useTheme();
 
   const shareIcon = <Feather name="share" size={24} color={colors.text} />;
+  const clearIcon = <Feather name="x" size={24} color={colors.text} />;
 
   const shareJoke = async (joke) => {
     try {
@@ -43,7 +46,7 @@ export const FavouritesScreen = () => {
   const FavouritesCard = ({ item, index }) => {
     return (
       <AppCard key={index}>
-        <View style={{ flexDirection: "row" }}>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
           <View style={{ flex: 0.8 }}>
             {item.setup && <AppText>{item.setup}</AppText>}
             <AppText fontWeight={item.setup ? 700 : 400}>
@@ -78,11 +81,7 @@ export const FavouritesScreen = () => {
   return (
     <AppScreen>
       {favourites.length === 0 ? <EmptyView /> : <LoadedView />}
+      {/* <AppButton title="Clear storage" onPress={() => AsyncStorage.clear()} /> */}
     </AppScreen>
   );
 };
-
-// <AppCard key={index}>
-//   <AppText>{fav.setup}</AppText>
-//   <AppText>{fav.delivery}</AppText>
-// </AppCard>;

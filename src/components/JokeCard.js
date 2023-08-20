@@ -34,7 +34,7 @@ export const JokeCard = ({ setup, delivery, isLoading, shareJoke }) => {
   );
 
   const addToFavourites = () => {
-    setFavourites((prev) => [...prev, { setup, delivery }]);
+    setFavourites([...favourites, { setup, delivery }]);
   };
 
   const LoadingView = () => {

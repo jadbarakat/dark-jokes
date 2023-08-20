@@ -16,7 +16,6 @@ export const AppCard = ({ children, big }) => {
           minHeight: big ? 200 : null,
           borderRadius: 8,
           justifyContent: "center",
-          // alignItems: "center",
           borderWidth: 1,
           borderColor: colors.border,
           paddingVertical: 24,
