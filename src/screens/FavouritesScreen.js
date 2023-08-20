@@ -8,10 +8,10 @@ import { Feather } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
 import { useAtom } from "jotai";
 
-import { globalFavourites } from "../state/globalStates";
+import { favouritesAtom } from "../state/globalStates";
 
 export const FavouritesScreen = () => {
-  const [favourites, setFavourites] = useAtom(globalFavourites);
+  const [favourites, setFavourites] = useAtom(favouritesAtom);
   const { colors } = useTheme();
 
   const shareIcon = <Feather name="share" size={24} color={colors.text} />;

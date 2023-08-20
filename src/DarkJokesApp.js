@@ -7,10 +7,10 @@ import { AppDarkTheme, AppLightTheme } from "./styles/theme";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { useAtom } from "jotai";
 
-import { globalTheme } from "./state/globalStates";
+import { themeAtom } from "./state/globalStates";
 
 export const DarkJokesApp = () => {
-  const [theme] = useAtom(globalTheme);
+  const [theme] = useAtom(themeAtom);
   const isDark = theme === "dark";
 
   return (

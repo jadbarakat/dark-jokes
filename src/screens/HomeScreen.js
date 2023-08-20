@@ -18,7 +18,7 @@ import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { AppScreen } from "../components/AppScreen";
 import { useAtom } from "jotai";
-import { globalTheme } from "../state/globalStates";
+import { themeAtom } from "../state/globalStates";
 
 const STATIC_JOKE = {
   setup: "Static setup?",
@@ -27,7 +27,7 @@ const STATIC_JOKE = {
 
 export const HomeScreen = () => {
   const navigation = useNavigation();
-  const [theme, setTheme] = useAtom(globalTheme);
+  const [theme, setTheme] = useAtom(themeAtom);
   const isDark = theme === "dark";
 
   const { colors } = useTheme();

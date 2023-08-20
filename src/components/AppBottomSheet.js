@@ -9,11 +9,11 @@ import { AppIconButton } from "./AppIconButton";
 
 import { Feather } from "@expo/vector-icons";
 import { useAtom } from "jotai";
-import { globalTheme } from "../state/globalStates";
+import { themeAtom } from "../state/globalStates";
 
 export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
   const { colors } = useTheme();
-  const [theme] = useAtom(globalTheme);
+  const [theme] = useAtom(themeAtom);
 
   const snapPoints = useMemo(() => ["50%"]);
 

@@ -13,14 +13,14 @@ import { shadow } from "../styles/shadow";
 import LottieView from "lottie-react-native";
 import { AppCard } from "./AppCard";
 import { useAtom } from "jotai";
-import { globalFavourites, globalTheme } from "../state/globalStates";
+import { favouritesAtom, themeAtom } from "../state/globalStates";
 
 export const JokeCard = ({ setup, delivery, isLoading, shareJoke }) => {
   const { colors } = useTheme();
-  const [theme] = useAtom(globalTheme);
+  const [theme] = useAtom(themeAtom);
   const isDark = theme === "dark";
 
-  const [favourites, setFavourites] = useAtom(globalFavourites);
+  const [favourites, setFavourites] = useAtom(favouritesAtom);
 
   const animation = useRef(null);
   const loaderLight = require("../../assets/lottie/data.json");

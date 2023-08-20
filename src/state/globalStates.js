@@ -4,7 +4,7 @@ import { Appearance } from "react-native";
 
 // global state for app theme
 const colorScheme = Appearance.getColorScheme();
-export const globalTheme = atom(colorScheme);
+export const themeAtom = atom(colorScheme);
 
 // global state for favourite jokes
-export const globalFavourites = atom([]);
+export const favouritesAtom = atom([]);
