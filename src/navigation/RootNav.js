@@ -1,31 +1,48 @@
-import React, { useContext } from "react";
-
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import { NavigationContainer, useTheme } from "@react-navigation/native";
+import { useTheme } from "@react-navigation/native";
 import { HomeScreen } from "../screens/HomeScreen";
 import { FavouritesScreen } from "../screens/FavouritesScreen";
-import { AppThemeContext } from "../context/AppThemeContext";
-import { AppDarkTheme, AppLightTheme } from "../styles/theme";
 import { AppHeader } from "./AppHeader";
-import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+
+import { Feather } from "@expo/vector-icons";
 
 const Drawer = createDrawerNavigator();
-const Stack = createNativeStackNavigator();
 
 export const RootNav = () => {
-  const theme = useContext(AppThemeContext);
-  const isDark = theme === "dark";
+  const { colors } = useTheme();
 
   return (
-    <NavigationContainer theme={isDark ? AppDarkTheme : AppLightTheme}>
-      <BottomSheetModalProvider>
-        <Drawer.Navigator screenOptions={{ header: () => <AppHeader /> }}>
-          <Drawer.Screen name="Home" component={HomeScreen} />
-          <Drawer.Screen name="Favourites" component={FavouritesScreen} />
-        </Drawer.Navigator>
-      </BottomSheetModalProvider>
-    </NavigationContainer>
+    <Drawer.Navigator
+      screenOptions={{
+        header: () => <AppHeader />,
+        drawerActiveTintColor: colors.primary,
+        drawerType: "slide",
+        drawerLabelStyle: {
+          fontSize: 16,
+        },
+      }}
+    >
+      <Drawer.Screen
+        name="home"
+        options={{
+          title: "Home",
+          drawerIcon: ({ focused, color, size }) => (
+            <Feather name="home" color={color} size={size} />
+          ),
+        }}
+        component={HomeScreen}
+      />
+      <Drawer.Screen
+        name="favourites"
+        options={{
+          title: "Favourites",
+          drawerIcon: ({ focused, color, size }) => (
+            <Feather name="heart" color={color} size={size} />
+          ),
+        }}
+        component={FavouritesScreen}
+      />
+    </Drawer.Navigator>
   );
 };

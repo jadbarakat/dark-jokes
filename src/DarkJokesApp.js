@@ -1,17 +1,25 @@
-import { useContext } from "react";
 import { StatusBar } from "expo-status-bar";
-import { AppThemeContext } from "./context/AppThemeContext";
 
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { RootNav } from "./navigation/RootNav";
+import { NavigationContainer } from "@react-navigation/native";
+import { AppDarkTheme, AppLightTheme } from "./styles/theme";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import { useAtom } from "jotai";
+
+import { globalTheme } from "./state/globalStates";
 
 export const DarkJokesApp = () => {
-  const theme = useContext(AppThemeContext);
+  const [theme] = useAtom(globalTheme);
   const isDark = theme === "dark";
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <RootNav />
+      <NavigationContainer theme={isDark ? AppDarkTheme : AppLightTheme}>
+        <BottomSheetModalProvider>
+          <RootNav />
+        </BottomSheetModalProvider>
+      </NavigationContainer>
       <StatusBar style={isDark ? "light" : "dark"} />
     </GestureHandlerRootView>
   );

@@ -31,7 +31,7 @@ export const AppButton = ({
       disabled={disabled}
       {...props}
     >
-      {icon && <View style={{ marginRight: 4 }}>{icon}</View>}
+      {icon && <View style={{ marginRight: 8 }}>{icon}</View>}
       <AppText color={AppLightTheme.colors.background}>{title}</AppText>
     </TouchableOpacity>
   );

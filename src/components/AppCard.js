@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
 import { View } from "react-native";
-import { AppThemeContext } from "../context/AppThemeContext";
 import { useTheme } from "@react-navigation/native";
 import { shadow } from "../styles/shadow";
+import { useAtom } from "jotai";
+import { globalTheme } from "../state/globalStates";
 
-export const AppCard = ({ children }) => {
-  const theme = useContext(AppThemeContext);
+export const AppCard = ({ children, big }) => {
+  const [theme] = useAtom(globalTheme);
   const { colors } = useTheme();
 
   return (
@@ -13,14 +13,15 @@ export const AppCard = ({ children }) => {
       style={[
         {
           backgroundColor: colors.card,
-          minHeight: 200,
+          minHeight: big ? 200 : null,
           borderRadius: 8,
           justifyContent: "center",
-          alignItems: "center",
+          // alignItems: "center",
           borderWidth: 1,
           borderColor: colors.border,
           paddingVertical: 24,
           paddingHorizontal: 24,
+          marginBottom: 16,
         },
         theme === "light" ? shadow : null,
       ]}

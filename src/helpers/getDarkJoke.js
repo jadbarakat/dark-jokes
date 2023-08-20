@@ -23,8 +23,7 @@ export const getDarkJoke = async (blacklist) => {
       return { setup, delivery };
     }
   } catch (error) {
-    let errorMessage = "Something went wrong. Please try again.";
-    return errorMessage;
+    console.error(error);
   }
 };
 

@@ -13,8 +13,6 @@ import { AppIconButton } from "../components/AppIconButton";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation, useRoute, useTheme } from "@react-navigation/native";
 
-const SCREEN_HEIGHT = Dimensions.get("screen").height;
-const WINDOW_HEIGHT = Dimensions.get("window").height;
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight;
 
 export const AppHeader = () => {

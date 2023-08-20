@@ -1,18 +1,19 @@
-import React, { useCallback, useContext, useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import { TouchableOpacity, View } from "react-native";
 
 import { BottomSheetBackdrop, BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useTheme } from "@react-navigation/native";
-import { AppThemeContext } from "../context/AppThemeContext";
 import { AppButton } from "./AppButton";
 import { AppText } from "./AppText";
 import { AppIconButton } from "./AppIconButton";
 
 import { Feather } from "@expo/vector-icons";
+import { useAtom } from "jotai";
+import { globalTheme } from "../state/globalStates";
 
 export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
   const { colors } = useTheme();
-  const theme = useContext(AppThemeContext);
+  const [theme] = useAtom(globalTheme);
 
   const snapPoints = useMemo(() => ["50%"]);
 
@@ -56,7 +57,7 @@ export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
       index={0}
       snapPoints={snapPoints}
       backgroundStyle={{
-        backgroundColor: colors.background,
+        backgroundColor: colors.card,
       }}
       handleComponent={handleComponent}
       backdropComponent={renderBackdrop}

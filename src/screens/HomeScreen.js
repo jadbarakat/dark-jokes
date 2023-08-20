@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Share, View } from "react-native";
 
 import { getDarkJoke } from "../helpers/getDarkJoke";
@@ -13,21 +13,21 @@ import { AppBottomSheet } from "../components/AppBottomSheet";
 
 import { Feather } from "@expo/vector-icons";
 
-import {
-  AppThemeContext,
-  AppThemeUpdateContext,
-} from "../context/AppThemeContext";
-
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 
-// import LottieView from "lottie-react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { AppScreen } from "../components/AppScreen";
+import { useAtom } from "jotai";
+import { globalTheme } from "../state/globalStates";
+
+const STATIC_JOKE = {
+  setup: "Static setup?",
+  delivery: "This is a very funny static delivery.",
+};
 
 export const HomeScreen = () => {
   const navigation = useNavigation();
-  const theme = useContext(AppThemeContext);
-  const setTheme = useContext(AppThemeUpdateContext);
+  const [theme, setTheme] = useAtom(globalTheme);
   const isDark = theme === "dark";
 
   const { colors } = useTheme();
@@ -43,17 +43,11 @@ export const HomeScreen = () => {
   const bottomSheetModalRef = useRef(<BottomSheetModal />);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // theme button lottie stuff
-  const changeThemeLottie = require("../../assets/lottie/Sun-Moon-lottie.json");
-  const changeThemeLottieAnimation = useRef(null);
-
-  // filter button lottie stuff
-  const openFilterLottieLight = require("../../assets/lottie/filter-light.json");
-  const openFilterLottieDark = require("../../assets/lottie/filter-dark.json");
-  const openFilterLottieAnimation = useRef(null);
-
   useEffect(() => {
-    getJoke();
+    // getJoke();
+
+    setSetup(STATIC_JOKE.setup);
+    setDelivery(STATIC_JOKE.delivery);
   }, []);
 
   const getJoke = () => {
@@ -80,10 +74,6 @@ export const HomeScreen = () => {
   };
 
   const handleChangeTheme = () => {
-    theme === "dark"
-      ? changeThemeLottieAnimation.current?.play(30, 100) // sun -> moon
-      : changeThemeLottieAnimation.current?.play(100, 1000); // moon -> sun
-
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
@@ -101,7 +91,6 @@ export const HomeScreen = () => {
       <AppScreen>
         <View
           style={{
-            flex: 0.1,
             alignItems: "flex-start",
             justifyContent: "center",
             flexDirection: "row",
@@ -126,9 +115,9 @@ export const HomeScreen = () => {
         </View>
         <View
           style={{
-            flex: 0.7,
-            paddingTop: 80,
-            height: "100%",
+            flex: 0.9,
+            justifyContent: "center",
+            paddingTop: 24,
           }}
         >
           <JokeCard
@@ -140,7 +129,6 @@ export const HomeScreen = () => {
         </View>
         <View
           style={{
-            flex: 0.2,
             width: "100%",
             justifyContent: "center",
           }}

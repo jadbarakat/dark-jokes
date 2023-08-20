@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useRef } from "react";
 import { ActivityIndicator, Platform, ScrollView, View } from "react-native";
 
 import { useTheme } from "@react-navigation/native";
@@ -6,32 +6,37 @@ import { useTheme } from "@react-navigation/native";
 import { AppHeroText } from "./AppHeroText";
 import { AppButton } from "./AppButton";
 
-import { Ionicons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import { AppLightTheme } from "../styles/theme";
-import { AppThemeContext } from "../context/AppThemeContext";
 import { shadow } from "../styles/shadow";
 
 import LottieView from "lottie-react-native";
 import { AppCard } from "./AppCard";
+import { useAtom } from "jotai";
+import { globalFavourites, globalTheme } from "../state/globalStates";
 
 export const JokeCard = ({ setup, delivery, isLoading, shareJoke }) => {
   const { colors } = useTheme();
-  const theme = useContext(AppThemeContext);
+  const [theme] = useAtom(globalTheme);
   const isDark = theme === "dark";
+
+  const [favourites, setFavourites] = useAtom(globalFavourites);
 
   const animation = useRef(null);
   const loaderLight = require("../../assets/lottie/data.json");
   const loaderDark = require("../../assets/lottie/loader-3dots-dark.json");
 
   const shareIcon = (
-    <Ionicons
-      name="share-outline"
-      size={24}
-      color={AppLightTheme.colors.background}
-    />
+    <Feather name="share" size={20} color={AppLightTheme.colors.background} />
+  );
+  const favouritesIcon = (
+    <Feather name="heart" size={20} color={AppLightTheme.colors.background} />
   );
 
-  // const LoadingView = () => <ActivityIndicator color={colors.primary} />;
+  const addToFavourites = () => {
+    setFavourites((prev) => [...prev, { setup, delivery }]);
+  };
+
   const LoadingView = () => {
     return Platform.OS === "android" ? (
       <ActivityIndicator
@@ -47,6 +52,7 @@ export const JokeCard = ({ setup, delivery, isLoading, shareJoke }) => {
         style={{
           width: 100,
           height: 100,
+          alignSelf: "center",
         }}
         source={isDark ? loaderDark : loaderLight}
       />
@@ -96,8 +102,15 @@ export const JokeCard = ({ setup, delivery, isLoading, shareJoke }) => {
       <View style={{ marginTop: 24 }}>
         <AppButton title="Share joke" icon={shareIcon} onPress={shareJoke} />
       </View>
+      <View style={{ marginTop: 24 }}>
+        <AppButton
+          title="Add to favourites"
+          icon={favouritesIcon}
+          onPress={addToFavourites}
+        />
+      </View>
     </View>
   );
 
-  return <AppCard>{isLoading ? <LoadingView /> : <LoadedView />}</AppCard>;
+  return <AppCard big>{isLoading ? <LoadingView /> : <LoadedView />}</AppCard>;
 };
