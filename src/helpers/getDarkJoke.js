@@ -15,12 +15,14 @@ export const getDarkJoke = async (blacklist) => {
 
     if (response.data.type === "single") {
       const delivery = response.data.joke;
-      return { delivery, JOKE_FLAGS };
+      const jokeId = response.data.id;
+      return { delivery, jokeId };
     }
     if (response.data.type === "twopart") {
       const setup = response.data.setup;
+      const jokeId = response.data.id;
       const delivery = response.data.delivery;
-      return { setup, delivery };
+      return { setup, delivery, jokeId };
     }
   } catch (error) {
     console.error(error);

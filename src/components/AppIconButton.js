@@ -1,13 +1,11 @@
 import React from "react";
-import { TouchableHighlight, TouchableOpacity, View } from "react-native";
-import { AppText } from "./AppText";
+import { TouchableOpacity } from "react-native";
 
-import { Feather } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
 
-const SIZE = 56;
+const SIZE = 48;
 
-export const AppIconButton = ({ icon, onPress, filled }) => {
+export const AppIconButton = ({ icon, onPress, filled, noBorder }) => {
   const { colors } = useTheme();
 
   return (
@@ -19,8 +17,8 @@ export const AppIconButton = ({ icon, onPress, filled }) => {
         borderRadius: SIZE,
         alignItems: "center",
         justifyContent: "center",
-        marginHorizontal: 8,
-        borderWidth: filled ? 0.5 : 0,
+        // marginHorizontal: 8,
+        borderWidth: filled ? (noBorder ? 0 : 0.5) : 0,
         borderColor: colors.border,
       }}
       activeOpacity={0.7}

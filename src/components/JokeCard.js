@@ -6,35 +6,45 @@ import { useTheme } from "@react-navigation/native";
 import { AppHeroText } from "./AppHeroText";
 import { AppButton } from "./AppButton";
 
-import { Feather } from "@expo/vector-icons";
+import { Feather, Ionicons, FontAwesome } from "@expo/vector-icons";
 import { AppLightTheme } from "../styles/theme";
-import { shadow } from "../styles/shadow";
 
 import LottieView from "lottie-react-native";
 import { AppCard } from "./AppCard";
 import { useAtom } from "jotai";
 import { favouritesAtom, themeAtom } from "../state/globalStates";
+import { AppIconButton } from "./AppIconButton";
 
-export const JokeCard = ({ setup, delivery, isLoading, shareJoke }) => {
+export const JokeCard = ({ joke, isLoading, shareJoke }) => {
   const { colors } = useTheme();
+  const { setup, delivery, jokeId } = joke;
   const [theme] = useAtom(themeAtom);
   const isDark = theme === "dark";
 
   const [favourites, setFavourites] = useAtom(favouritesAtom);
 
+  const isAFavourite = favourites.some((fav) => fav.jokeId === jokeId);
+
   const animation = useRef(null);
-  const loaderLight = require("../../assets/lottie/data.json");
+  const loaderLight = require("../../assets/lottie/loader-3dots-light.json");
   const loaderDark = require("../../assets/lottie/loader-3dots-dark.json");
 
   const shareIcon = (
     <Feather name="share" size={20} color={AppLightTheme.colors.background} />
   );
   const favouritesIcon = (
-    <Feather name="heart" size={20} color={AppLightTheme.colors.background} />
+    <FontAwesome
+      name={isAFavourite ? "star" : "star-o"}
+      size={30}
+      color={isAFavourite ? colors.warning : colors.text}
+    />
   );
 
-  const addToFavourites = () => {
-    setFavourites([...favourites, { setup, delivery }]);
+  const toggleFavourite = () => {
+    if (!isAFavourite)
+      setFavourites([...favourites, { setup, delivery, jokeId }]);
+    if (isAFavourite)
+      setFavourites((prev) => prev.filter((fav) => fav.jokeId !== jokeId));
   };
 
   const LoadingView = () => {
@@ -99,15 +109,18 @@ export const JokeCard = ({ setup, delivery, isLoading, shareJoke }) => {
           </View>
         </View>
       )}
-      <View style={{ marginTop: 24 }}>
-        <AppButton title="Share joke" icon={shareIcon} onPress={shareJoke} />
-      </View>
-      <View style={{ marginTop: 24 }}>
-        <AppButton
-          title="Add to favourites"
-          icon={favouritesIcon}
-          onPress={addToFavourites}
-        />
+      <View style={{ marginTop: 24, flexDirection: "row" }}>
+        <View style={{ flex: 1, paddingRight: 8 }}>
+          <AppButton title="Share joke" icon={shareIcon} onPress={shareJoke} />
+        </View>
+        <View style={{ justifyContent: "center" }}>
+          <AppIconButton
+            icon={favouritesIcon}
+            filled
+            noBorder
+            onPress={toggleFavourite}
+          />
+        </View>
       </View>
     </View>
   );

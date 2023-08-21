@@ -10,6 +10,12 @@ export const AppLightTheme = {
     card: "#FFF",
     border: "#DEDFE3",
     text: "#333",
+    grey: "#AAACB0",
+    success: "#0FB800",
+    successTwo: "#679436",
+    danger: "#A30000",
+    warning: "#F2BE3A",
+    info: "#10ADBC",
   },
 };
 

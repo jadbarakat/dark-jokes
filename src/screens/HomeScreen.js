@@ -26,36 +26,31 @@ const STATIC_JOKE = {
 };
 
 export const HomeScreen = () => {
-  const navigation = useNavigation();
   const [theme, setTheme] = useAtom(themeAtom);
   const isDark = theme === "dark";
 
   const { colors } = useTheme();
 
-  const [setup, setSetup] = useState("");
-  const [delivery, setDelivery] = useState("");
-
+  const [joke, setJoke] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-
   const [blacklist, setBlacklist] = useState([]);
 
   // bottomSheet stuff
   const bottomSheetModalRef = useRef(<BottomSheetModal />);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    // getJoke();
-
-    setSetup(STATIC_JOKE.setup);
-    setDelivery(STATIC_JOKE.delivery);
+    getJoke();
   }, []);
 
   const getJoke = () => {
     setIsLoading(true);
     getDarkJoke(blacklist)
       .then((value) => {
-        setSetup(value.setup);
-        setDelivery(value.delivery);
+        setJoke({
+          jokeId: value.jokeId,
+          setup: value.setup,
+          delivery: value.delivery,
+        });
         setIsLoading(false);
       })
       .catch((error) => {
@@ -64,6 +59,7 @@ export const HomeScreen = () => {
   };
 
   const shareJoke = async () => {
+    const { setup, delivery } = joke;
     try {
       await Share.share({
         message: setup ? `${setup} ${delivery}` : delivery,
@@ -96,17 +92,19 @@ export const HomeScreen = () => {
             flexDirection: "row",
           }}
         >
-          <AppIconButton
-            icon={
-              <Feather
-                name={isDark ? "sun" : "moon"}
-                size={24}
-                color={colors.text}
-              />
-            }
-            filled
-            onPress={handleChangeTheme}
-          />
+          <View style={{ paddingRight: 8 }}>
+            <AppIconButton
+              icon={
+                <Feather
+                  name={isDark ? "sun" : "moon"}
+                  size={24}
+                  color={colors.text}
+                />
+              }
+              filled
+              onPress={handleChangeTheme}
+            />
+          </View>
           <AppIconButton
             icon={<Feather name="filter" size={24} color={colors.text} />}
             filled
@@ -116,16 +114,12 @@ export const HomeScreen = () => {
         <View
           style={{
             flex: 0.9,
-            justifyContent: "center",
+            marginTop: 24,
+            justifyContent: "flex-start",
             paddingTop: 24,
           }}
         >
-          <JokeCard
-            setup={setup}
-            delivery={delivery}
-            isLoading={isLoading}
-            shareJoke={shareJoke}
-          />
+          <JokeCard joke={joke} isLoading={isLoading} shareJoke={shareJoke} />
         </View>
         <View
           style={{
@@ -133,20 +127,14 @@ export const HomeScreen = () => {
             justifyContent: "center",
           }}
         >
-          <AppButton title="Get another joke" onPress={getJoke} />
+          <AppButton
+            disabled={isLoading}
+            title="Get another joke"
+            onPress={getJoke}
+          />
         </View>
       </AppScreen>
-      <AppBottomSheet
-        // onAnimate={(index) => {
-        //   if (index === 0) {
-        //     openFilterLottieAnimation.current?.play(50, 100);
-        //   }
-        //   if (index === -1) {
-        //     openFilterLottieAnimation.current?.play(0, 50);
-        //   }
-        // }}
-        sheetRef={bottomSheetModalRef}
-      >
+      <AppBottomSheet sheetRef={bottomSheetModalRef}>
         <View style={{ marginBottom: 8 }}>
           <AppText fontSize={24}>Don't show me jokes that are</AppText>
         </View>
@@ -166,37 +154,3 @@ export const HomeScreen = () => {
     </>
   );
 };
-
-{
-  /* <View
-          style={{
-            height: "10%",
-            // backgroundColor: "olive",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <AppText>Joke themes hidden: </AppText>
-          {blacklist.length === 0 ? (
-            <AppText>None</AppText>
-          ) : (
-            <View
-              style={{
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "center",
-              }}
-            >
-              {blacklist.map((flag, index) => {
-                const string = `${flag}, `;
-
-                return (
-                  <AppText key={index}>
-                    {string.charAt(0).toUpperCase() + string.slice(1)}
-                  </AppText>
-                );
-              })}
-            </View>
-          )}
-        </View> */
-}
