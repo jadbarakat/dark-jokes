@@ -5,7 +5,13 @@ import { Text, View } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { AppText } from "./AppText";
 
-export const AppCheckbox = ({ text, onPress, isChecked }) => {
+export const AppCheckbox = ({
+  text,
+  onPress,
+  isChecked,
+  disabled,
+  checkboxRef,
+}) => {
   const { colors } = useTheme();
 
   return (
@@ -22,6 +28,8 @@ export const AppCheckbox = ({ text, onPress, isChecked }) => {
       size={24}
       style={{ marginVertical: 8 }}
       isChecked={isChecked}
+      disabled={disabled}
+      ref={checkboxRef}
     />
   );
 };

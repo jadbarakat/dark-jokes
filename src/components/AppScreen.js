@@ -6,7 +6,7 @@ export const AppScreen = ({ children, fullWidth }) => {
     <View
       style={{
         flex: 1,
-        paddingHorizontal: fullWidth ? 0 : 24,
+        paddingHorizontal: fullWidth ? 0 : 16,
       }}
     >
       {children}

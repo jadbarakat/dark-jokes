@@ -25,7 +25,7 @@ const STATIC_JOKE = {
   delivery: "This is a very funny static delivery.",
 };
 
-export const HomeScreen = () => {
+export const HomeScreen = ({ bottomSheetModalRef, sheetRef }) => {
   const [theme, setTheme] = useAtom(themeAtom);
   const isDark = theme === "dark";
 
@@ -34,9 +34,6 @@ export const HomeScreen = () => {
   const [joke, setJoke] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [blacklist, setBlacklist] = useState([]);
-
-  // bottomSheet stuff
-  const bottomSheetModalRef = useRef(<BottomSheetModal />);
 
   useEffect(() => {
     getJoke();
@@ -73,10 +70,6 @@ export const HomeScreen = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
-  const handlePresentModalPress = () => {
-    bottomSheetModalRef.current?.present();
-  };
-
   const onCheckboxPress = (flag, checked) => {
     if (checked) setBlacklist((prev) => [...prev, flag]);
     if (!checked) setBlacklist((prev) => prev.filter((item) => item !== flag));
@@ -87,36 +80,9 @@ export const HomeScreen = () => {
       <AppScreen>
         <View
           style={{
-            alignItems: "flex-start",
-            justifyContent: "center",
-            flexDirection: "row",
-          }}
-        >
-          <View style={{ paddingRight: 8 }}>
-            <AppIconButton
-              icon={
-                <Feather
-                  name={isDark ? "sun" : "moon"}
-                  size={24}
-                  color={colors.text}
-                />
-              }
-              filled
-              onPress={handleChangeTheme}
-            />
-          </View>
-          <AppIconButton
-            icon={<Feather name="filter" size={24} color={colors.text} />}
-            filled
-            onPress={handlePresentModalPress}
-          />
-        </View>
-        <View
-          style={{
             flex: 0.9,
             marginTop: 24,
-            justifyContent: "flex-start",
-            paddingTop: 24,
+            justifyContent: "center",
           }}
         >
           <JokeCard joke={joke} isLoading={isLoading} shareJoke={shareJoke} />

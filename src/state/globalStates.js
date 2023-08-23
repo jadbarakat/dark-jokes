@@ -11,3 +11,6 @@ export const themeAtom = atom(colorScheme);
 // global state for favourite jokes
 const storage = createJSONStorage(() => AsyncStorage);
 export const favouritesAtom = atomWithStorage("favourites", [], storage);
+
+// state to show or hide Playground page
+export const playgroundAtom = atom(false);

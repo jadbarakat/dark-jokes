@@ -14,6 +14,8 @@ import { AppCheckbox } from "../components/AppCheckbox";
 
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+// TODO: figure out if you can animate checkboxes even though only their state is changing
+
 export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
   const [favourites, setFavourites] = useAtom(favouritesAtom);
   const [favouritesToRemove, setFavouritesToRemove] = useState([]);
@@ -36,12 +38,6 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
     } catch (error) {
       Alert.alert(error.message);
     }
-  };
-
-  const removeFromFavourites = (index) => {
-    deleteAlert(() =>
-      setFavourites(favourites.filter((joke, jokeIndex) => index !== jokeIndex))
-    );
   };
 
   const deleteAlert = (deleteFunction) =>
@@ -84,7 +80,7 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
 
   const FavouritesCard = ({ item, index }) => {
     return (
-      <>
+      <TouchableOpacity activeOpacity={0.8} onPress={() => shareJoke(item)}>
         <View
           style={{
             backgroundColor: colors.card,
@@ -94,13 +90,7 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
           }}
         >
           <View style={{ flex: 0.1, alignItems: "flex-start" }}>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => shareJoke(item)}
-              style={{ flex: 1, justifyContent: "center" }}
-            >
-              <Feather name="share" size={24} color={colors.text} />
-            </TouchableOpacity>
+            <Feather name="share" size={24} color={colors.text} />
           </View>
           <View style={{ flex: 0.9, paddingHorizontal: 8 }}>
             {item.setup && <AppText>{item.setup}</AppText>}
@@ -108,29 +98,50 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
               {item.delivery}
             </AppText>
           </View>
-          {/* <View style={{ flex: 0.1 }}>
-            <TouchableOpacity
-              onPress={() => removeFromFavourites(index)}
-              onLongPress={() => setIsEditing((prev) => !prev)}
-              activeOpacity={0.8}
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "flex-end",
-              }}
-            >
-              <Feather name="trash" size={24} color={colors.text} />
-            </TouchableOpacity>
-          </View> */}
         </View>
         <View style={{ height: 4, backgroundColor: colors.background }} />
-      </>
+      </TouchableOpacity>
     );
   };
+  // const FavouritesCard = ({ item, index }) => {
+  //   return (
+  //     <>
+  //       <View
+  //         style={{
+  //           backgroundColor: colors.card,
+  //           flexDirection: "row",
+  //           alignItems: "center",
+  //           padding: 16,
+  //         }}
+  //       >
+  //         <View style={{ flex: 0.1, alignItems: "flex-start" }}>
+  //           <TouchableOpacity
+  //             activeOpacity={0.8}
+  //             onPress={() => shareJoke(item)}
+  //             style={{ flex: 1, justifyContent: "center" }}
+  //           >
+  //             <Feather name="share" size={24} color={colors.text} />
+  //           </TouchableOpacity>
+  //         </View>
+  //         <View style={{ flex: 0.9, paddingHorizontal: 8 }}>
+  //           {item.setup && <AppText>{item.setup}</AppText>}
+  //           <AppText fontWeight={item.setup ? 700 : 400}>
+  //             {item.delivery}
+  //           </AppText>
+  //         </View>
+  //       </View>
+  //       <View style={{ height: 4, backgroundColor: colors.background }} />
+  //     </>
+  //   );
+  // };
 
   const FavouritesEditingCard = ({ item, index }) => {
-    const isChecked = favouritesToRemove.some(
-      (joke) => joke.jokeId === item.jokeId
+    // const isChecked = favouritesToRemove.some(
+    //   (joke) => joke.jokeId === item.jokeId
+    // );
+
+    const [isChecked, setIsChecked] = useState(
+      favouritesToRemove.some((joke) => joke.jokeId === item.jokeId)
     );
 
     const onCheckboxPress = (item) => {
@@ -142,7 +153,7 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
     };
 
     return (
-      <>
+      <TouchableOpacity activeOpacity={1} onPress={() => onCheckboxPress(item)}>
         <View
           style={{
             backgroundColor: colors.card,
@@ -158,8 +169,9 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
           >
             <AppCheckbox
               key={index}
-              onPress={() => onCheckboxPress(item)}
+              onPress={() => {}}
               isChecked={isChecked}
+              disabled
             />
           </View>
           <View style={{ flex: 0.8, paddingHorizontal: 8 }}>
@@ -171,9 +183,55 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
           <View style={{ flex: 0.1 }}></View>
         </View>
         <View style={{ height: 4, backgroundColor: colors.background }} />
-      </>
+      </TouchableOpacity>
     );
   };
+  // const FavouritesEditingCard = ({ item, index }) => {
+  //   const isChecked = favouritesToRemove.some(
+  //     (joke) => joke.jokeId === item.jokeId
+  //   );
+
+  //   const onCheckboxPress = (item) => {
+  //     if (!isChecked) setFavouritesToRemove((prev) => [...prev, item]);
+  //     if (isChecked)
+  //       setFavouritesToRemove((prev) =>
+  //         prev.filter((joke) => joke.jokeId !== item.jokeId)
+  //       );
+  //   };
+
+  //   return (
+  //     <>
+  //       <View
+  //         style={{
+  //           backgroundColor: colors.card,
+  //           flexDirection: "row",
+  //           alignItems: "center",
+  //           padding: 16,
+  //         }}
+  //       >
+  //         <View
+  //           style={{
+  //             flex: 0.1,
+  //           }}
+  //         >
+  //           <AppCheckbox
+  //             key={index}
+  //             onPress={() => onCheckboxPress(item)}
+  //             isChecked={isChecked}
+  //           />
+  //         </View>
+  //         <View style={{ flex: 0.8, paddingHorizontal: 8 }}>
+  //           {item.setup && <AppText>{item.setup}</AppText>}
+  //           <AppText fontWeight={item.setup ? 700 : 400}>
+  //             {item.delivery}
+  //           </AppText>
+  //         </View>
+  //         <View style={{ flex: 0.1 }}></View>
+  //       </View>
+  //       <View style={{ height: 4, backgroundColor: colors.background }} />
+  //     </>
+  //   );
+  // };
 
   const LoadedView = () => {
     return (
@@ -208,6 +266,7 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
             title="Delete selected"
             onPress={bulkRemoveFavourites}
             disabled={favouritesToRemove.length === 0}
+            noBorderRadius
           />
         </View>
       )}

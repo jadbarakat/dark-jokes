@@ -16,19 +16,10 @@ export const AppLightTheme = {
     danger: "#A30000",
     warning: "#F2BE3A",
     info: "#10ADBC",
+    orange: "#F38953",
   },
 };
 
-// export const AppDarkTheme = {
-//   dark: true,
-//   colors: {
-//     ...DarkTheme.colors,
-//     background: "#141414",
-//     card: "#292929",
-//     border: "#1F1F1F",
-//     text: "#F5F5F5",
-//   },
-// };
 export const AppDarkTheme = {
   dark: true,
   colors: {
@@ -45,5 +36,6 @@ export const AppDarkTheme = {
     danger: "#A30000",
     warning: "#F2BE3A",
     info: "#10ADBC",
+    orange: "#EF611A",
   },
 };

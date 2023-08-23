@@ -15,7 +15,7 @@ export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
   const { colors } = useTheme();
   const [theme] = useAtom(themeAtom);
 
-  const snapPoints = useMemo(() => ["50%"]);
+  const snapPoints = useMemo(() => ["45%"]);
 
   const closeModal = () => sheetRef.current?.close();
 

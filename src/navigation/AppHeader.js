@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dimensions,
   Platform,
   SafeAreaView,
   StatusBar,
   Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import { AppText } from "../components/AppText";
@@ -13,14 +15,25 @@ import { AppIconButton } from "../components/AppIconButton";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation, useRoute, useTheme } from "@react-navigation/native";
 import { capitalizeString } from "../helpers/capitalizeString";
+import { useAtom } from "jotai";
+import { playgroundAtom } from "../state/globalStates";
 
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight;
 
-export const AppHeader = ({ headerShown, iconRight }) => {
+export const AppHeader = ({ labelShown, iconRight }) => {
   const { colors } = useTheme();
   const navigation = useNavigation();
   const route = useRoute();
   const isAndroid = Platform.OS === "android";
+
+  const [headerPressCount, setHeaderPressCount] = useState(0);
+  const [playgroundShown, setPlaygroundShown] = useAtom(playgroundAtom);
+
+  useEffect(() => {
+    headerPressCount === 5
+      ? (setPlaygroundShown(true), setHeaderPressCount(0))
+      : null;
+  }, [headerPressCount]);
 
   return (
     <SafeAreaView
@@ -32,7 +45,7 @@ export const AppHeader = ({ headerShown, iconRight }) => {
     >
       <View
         style={{
-          flex: 0.2,
+          flex: 0.1,
           alignItems: "flex-start",
           paddingLeft: 4,
         }}
@@ -44,18 +57,24 @@ export const AppHeader = ({ headerShown, iconRight }) => {
       </View>
       <View
         style={{
-          flex: 0.6,
-          alignItems: isAndroid ? null : "center",
+          flex: 0.8,
+          marginLeft: isAndroid ? 17 : 0,
+          alignItems: isAndroid ? "flex-start" : "center",
           justifyContent: "center",
         }}
       >
-        {headerShown && (
-          <AppText fontSize={22} fontWeight={600}>
-            {capitalizeString(route.name)}
-          </AppText>
+        {labelShown && (
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() => setHeaderPressCount((prev) => prev + 1)}
+          >
+            <AppText fontSize={20} fontWeight={600}>
+              {capitalizeString(route.name)}
+            </AppText>
+          </TouchableOpacity>
         )}
       </View>
-      <View style={{ flex: 0.2, alignItems: "flex-end", paddingRight: 4 }}>
+      <View style={{ flex: 0.1, alignItems: "flex-end", paddingRight: 4 }}>
         {iconRight && iconRight}
       </View>
     </SafeAreaView>
