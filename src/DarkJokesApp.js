@@ -8,19 +8,22 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { useAtom } from "jotai";
 
 import { themeAtom } from "./state/globalStates";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export const DarkJokesApp = () => {
   const [theme] = useAtom(themeAtom);
   const isDark = theme === "dark";
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <NavigationContainer theme={isDark ? AppDarkTheme : AppLightTheme}>
-        <BottomSheetModalProvider>
-          <RootNav />
-        </BottomSheetModalProvider>
-      </NavigationContainer>
-      <StatusBar style={isDark ? "light" : "dark"} />
-    </GestureHandlerRootView>
+    <SafeAreaProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <NavigationContainer theme={isDark ? AppDarkTheme : AppLightTheme}>
+          <BottomSheetModalProvider>
+            <RootNav />
+          </BottomSheetModalProvider>
+        </NavigationContainer>
+        <StatusBar style={isDark ? "light" : "dark"} />
+      </GestureHandlerRootView>
+    </SafeAreaProvider>
   );
 };

@@ -9,10 +9,11 @@ import { Feather, FontAwesome5 } from "@expo/vector-icons";
 import { useRef, useState } from "react";
 import { AppIconButton } from "../components/AppIconButton";
 import { useAtom } from "jotai";
-import { playgroundAtom, themeAtom } from "../state/globalStates";
+import { playgroundAtom } from "../state/globalStates";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { AppDrawer } from "./AppDrawer";
 import { Playground } from "../screens/Playground";
+import { AppToast } from "../components/AppToast";
 
 const Drawer = createDrawerNavigator();
 
@@ -20,7 +21,6 @@ export const RootNav = () => {
   const { colors } = useTheme();
   const [isEditing, setIsEditing] = useState(false);
 
-  const [theme, setTheme] = useAtom(themeAtom);
   const [playgroundShown, setPlaygroundShown] = useAtom(playgroundAtom);
 
   // bottomSheet stuff
@@ -51,75 +51,81 @@ export const RootNav = () => {
   );
 
   return (
-    <Drawer.Navigator drawerContent={(props) => <AppDrawer {...props} />}>
-      <Drawer.Screen
-        name="home"
-        options={{
-          title: "Jokes",
-          drawerIcon: ({ color, size }) => (
-            <FontAwesome5 name="laugh" color={color} size={size} />
-          ),
-          header: () => <AppHeader iconRight={filterIcon} />,
-          drawerActiveTintColor: colors.primary,
-          drawerType: "slide",
-          drawerLabelStyle: {
-            fontSize: 16,
-            marginLeft: -16,
-          },
-        }}
-      >
-        {() => <HomeScreen bottomSheetModalRef={bottomSheetModalRef} />}
-      </Drawer.Screen>
-      <Drawer.Screen
-        name="favourites"
-        options={{
-          title: "Favourites",
-          drawerIcon: ({ color, size }) => (
-            <Feather name="star" color={color} size={size} />
-          ),
-          header: () => (
-            <AppHeader
-              labelShown
-              iconRight={isEditing ? cancelIcon : editIcon}
-            />
-          ),
-          drawerActiveTintColor: colors.primary,
-          drawerType: "slide",
-          drawerLabelStyle: {
-            fontSize: 16,
-            marginLeft: -16,
-          },
-        }}
-      >
-        {() => (
-          <FavouritesScreen isEditing={isEditing} setIsEditing={setIsEditing} />
-        )}
-      </Drawer.Screen>
-      {playgroundShown && (
+    <>
+      <Drawer.Navigator drawerContent={(props) => <AppDrawer {...props} />}>
         <Drawer.Screen
-          component={Playground}
-          name="playground"
+          name="home"
           options={{
-            title: "Playground",
+            title: "Jokes",
             drawerIcon: ({ color, size }) => (
-              <Feather
-                name="dribbble"
-                color={colors.orange}
-                size={size}
-                onPress={() => setPlaygroundShown(false)}
-              />
+              <FontAwesome5 name="laugh" color={color} size={size} />
             ),
-            header: () => <AppHeader labelShown />,
+            header: () => <AppHeader iconRight={filterIcon} />,
             drawerActiveTintColor: colors.primary,
             drawerType: "slide",
             drawerLabelStyle: {
               fontSize: 16,
               marginLeft: -16,
-              color: colors.orange,
             },
           }}
-        />
-      )}
-    </Drawer.Navigator>
+        >
+          {() => <HomeScreen bottomSheetModalRef={bottomSheetModalRef} />}
+        </Drawer.Screen>
+        <Drawer.Screen
+          name="favourites"
+          options={{
+            title: "Favourites",
+            drawerIcon: ({ color, size }) => (
+              <Feather name="star" color={color} size={size} />
+            ),
+            header: () => (
+              <AppHeader
+                labelShown
+                iconRight={isEditing ? cancelIcon : editIcon}
+              />
+            ),
+            drawerActiveTintColor: colors.primary,
+            drawerType: "slide",
+            drawerLabelStyle: {
+              fontSize: 16,
+              marginLeft: -16,
+            },
+          }}
+        >
+          {() => (
+            <FavouritesScreen
+              isEditing={isEditing}
+              setIsEditing={setIsEditing}
+            />
+          )}
+        </Drawer.Screen>
+        {playgroundShown && (
+          <Drawer.Screen
+            component={Playground}
+            name="playground"
+            options={{
+              title: "Playground",
+              drawerIcon: ({ color, size }) => (
+                <Feather
+                  name="dribbble"
+                  color={colors.orange}
+                  size={size}
+                  onPress={() => setPlaygroundShown(false)}
+                />
+              ),
+              header: () => <AppHeader labelShown />,
+              drawerActiveTintColor: colors.primary,
+              drawerType: "slide",
+              drawerLabelStyle: {
+                fontSize: 16,
+                marginLeft: -16,
+                color: colors.orange,
+              },
+            }}
+          />
+        )}
+      </Drawer.Navigator>
+      <AppToast />
+    </>
   );
 };

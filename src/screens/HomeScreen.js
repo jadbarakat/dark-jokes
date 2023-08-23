@@ -6,31 +6,19 @@ import { JOKE_FLAGS } from "../helpers/getDarkJoke";
 
 import { JokeCard } from "../components/JokeCard";
 import { AppButton } from "../components/AppButton";
-import { AppIconButton } from "../components/AppIconButton";
 import { AppCheckbox } from "../components/AppCheckbox";
 import { AppText } from "../components/AppText";
 import { AppBottomSheet } from "../components/AppBottomSheet";
 
-import { Feather } from "@expo/vector-icons";
-
-import { BottomSheetModal } from "@gorhom/bottom-sheet";
-
-import { useNavigation, useTheme } from "@react-navigation/native";
 import { AppScreen } from "../components/AppScreen";
-import { useAtom } from "jotai";
-import { themeAtom } from "../state/globalStates";
+import { capitalizeString } from "../helpers/capitalizeString";
 
 const STATIC_JOKE = {
   setup: "Static setup?",
   delivery: "This is a very funny static delivery.",
 };
 
-export const HomeScreen = ({ bottomSheetModalRef, sheetRef }) => {
-  const [theme, setTheme] = useAtom(themeAtom);
-  const isDark = theme === "dark";
-
-  const { colors } = useTheme();
-
+export const HomeScreen = ({ bottomSheetModalRef }) => {
   const [joke, setJoke] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [blacklist, setBlacklist] = useState([]);
@@ -64,10 +52,6 @@ export const HomeScreen = ({ bottomSheetModalRef, sheetRef }) => {
     } catch (error) {
       Alert.alert(error.message);
     }
-  };
-
-  const handleChangeTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
   const onCheckboxPress = (flag, checked) => {
@@ -107,7 +91,7 @@ export const HomeScreen = ({ bottomSheetModalRef, sheetRef }) => {
         {JOKE_FLAGS.map((flag, index) => {
           return (
             <AppCheckbox
-              text={flag}
+              text={flag === "nsfw" ? "NSFW" : capitalizeString(flag)}
               key={index}
               onPress={(checked) => {
                 onCheckboxPress(flag, checked);

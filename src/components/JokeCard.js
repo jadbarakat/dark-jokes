@@ -6,7 +6,7 @@ import { useTheme } from "@react-navigation/native";
 import { AppHeroText } from "./AppHeroText";
 import { AppButton } from "./AppButton";
 
-import { Feather, Ionicons, FontAwesome } from "@expo/vector-icons";
+import { Feather, FontAwesome } from "@expo/vector-icons";
 import { AppLightTheme } from "../styles/theme";
 
 import LottieView from "lottie-react-native";
@@ -25,7 +25,7 @@ export const JokeCard = ({ joke, isLoading, shareJoke }) => {
 
   const isAFavourite = favourites.some((fav) => fav.jokeId === jokeId);
 
-  const animation = useRef(null);
+  const animationRef = useRef(null);
   const loaderLight = require("../../assets/lottie/loader-3dots-light.json");
   const loaderDark = require("../../assets/lottie/loader-3dots-dark.json");
 
@@ -58,7 +58,7 @@ export const JokeCard = ({ joke, isLoading, shareJoke }) => {
       <LottieView
         autoPlay
         loop
-        ref={animation}
+        ref={animationRef}
         style={{
           width: 100,
           height: 100,
@@ -68,8 +68,6 @@ export const JokeCard = ({ joke, isLoading, shareJoke }) => {
       />
     );
   };
-
-  // const LoadingView = () => <ActivityIndicator color={colors.text} />;
 
   const LoadedView = () => (
     <View style={{ width: "100%", maxHeight: "98%" }}>
