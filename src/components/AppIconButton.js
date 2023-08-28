@@ -1,6 +1,4 @@
-import React from "react";
 import { TouchableOpacity } from "react-native";
-
 import { useTheme } from "@react-navigation/native";
 
 const SIZE = 48;
@@ -17,7 +15,6 @@ export const AppIconButton = ({ icon, onPress, filled, noBorder }) => {
         borderRadius: SIZE,
         alignItems: "center",
         justifyContent: "center",
-        // marginHorizontal: 8,
         borderWidth: filled ? (noBorder ? 0 : 0.5) : 0,
         borderColor: colors.border,
       }}

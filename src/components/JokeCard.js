@@ -1,33 +1,20 @@
-import React, { useRef } from "react";
 import { ActivityIndicator, Platform, ScrollView, View } from "react-native";
-
-import { useTheme } from "@react-navigation/native";
-
-import { AppHeroText } from "./AppHeroText";
 import { AppButton } from "./AppButton";
-
-import { Feather, FontAwesome } from "@expo/vector-icons";
-import { AppLightTheme } from "../styles/theme";
-
-import LottieView from "lottie-react-native";
 import { AppCard } from "./AppCard";
+import { AppIconButton } from "./AppIconButton";
+import { AppText } from "./AppText";
+import { useTheme } from "@react-navigation/native";
+import { AppLightTheme } from "../styles/theme";
+import { Feather, FontAwesome } from "@expo/vector-icons";
 import { useAtom } from "jotai";
 import { favouritesAtom, themeAtom } from "../state/globalStates";
-import { AppIconButton } from "./AppIconButton";
 
 export const JokeCard = ({ joke, isLoading, shareJoke }) => {
   const { colors } = useTheme();
   const { setup, delivery, jokeId } = joke;
-  const [theme] = useAtom(themeAtom);
-  const isDark = theme === "dark";
-
+  const isAndroid = Platform.OS === "android";
   const [favourites, setFavourites] = useAtom(favouritesAtom);
-
   const isAFavourite = favourites.some((fav) => fav.jokeId === jokeId);
-
-  const animationRef = useRef(null);
-  const loaderLight = require("../../assets/lottie/loader-3dots-light.json");
-  const loaderDark = require("../../assets/lottie/loader-3dots-dark.json");
 
   const shareIcon = (
     <Feather name="share" size={20} color={AppLightTheme.colors.background} />
@@ -47,27 +34,12 @@ export const JokeCard = ({ joke, isLoading, shareJoke }) => {
       setFavourites((prev) => prev.filter((fav) => fav.jokeId !== jokeId));
   };
 
-  const LoadingView = () => {
-    return Platform.OS === "android" ? (
-      <ActivityIndicator
-        color={colors.text}
-        size="large
-      "
-      />
-    ) : (
-      <LottieView
-        autoPlay
-        loop
-        ref={animationRef}
-        style={{
-          width: 100,
-          height: 100,
-          alignSelf: "center",
-        }}
-        source={isDark ? loaderDark : loaderLight}
-      />
-    );
-  };
+  const LoadingView = () => (
+    <ActivityIndicator
+      color={colors.text}
+      size={isAndroid ? "large" : "small"}
+    />
+  );
 
   const LoadedView = () => (
     <View style={{ width: "100%", maxHeight: "98%" }}>
@@ -76,7 +48,7 @@ export const JokeCard = ({ joke, isLoading, shareJoke }) => {
         <ScrollView showsVerticalScrollIndicator={false}>
           {setup && (
             <View>
-              <AppHeroText fontSize={28}>{setup}</AppHeroText>
+              <AppText fontSize={28}>{setup}</AppText>
             </View>
           )}
           <View
@@ -84,16 +56,16 @@ export const JokeCard = ({ joke, isLoading, shareJoke }) => {
               marginTop: setup ? 16 : 0,
             }}
           >
-            <AppHeroText fontWeight={setup ? 700 : 400} fontSize={30}>
+            <AppText fontWeight={setup ? 700 : 400} fontSize={30}>
               {delivery}
-            </AppHeroText>
+            </AppText>
           </View>
         </ScrollView>
       ) : (
         <View>
           {setup && (
             <View>
-              <AppHeroText fontSize={28}>{setup}</AppHeroText>
+              <AppText fontSize={28}>{setup}</AppText>
             </View>
           )}
           <View
@@ -101,9 +73,9 @@ export const JokeCard = ({ joke, isLoading, shareJoke }) => {
               marginTop: setup ? 16 : 0,
             }}
           >
-            <AppHeroText fontWeight={setup ? 700 : 400} fontSize={30}>
+            <AppText fontWeight={setup ? 700 : 400} fontSize={30}>
               {delivery}
-            </AppHeroText>
+            </AppText>
           </View>
         </View>
       )}

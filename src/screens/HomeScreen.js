@@ -1,32 +1,27 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Share, View } from "react-native";
-
-import { getDarkJoke } from "../helpers/getDarkJoke";
-import { JOKE_FLAGS } from "../helpers/getDarkJoke";
-
-import { JokeCard } from "../components/JokeCard";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { AppBottomSheet } from "../components/AppBottomSheet";
 import { AppButton } from "../components/AppButton";
 import { AppCheckbox } from "../components/AppCheckbox";
-import { AppText } from "../components/AppText";
-import { AppBottomSheet } from "../components/AppBottomSheet";
-
 import { AppScreen } from "../components/AppScreen";
+import { AppText } from "../components/AppText";
+import { JokeCard } from "../components/JokeCard";
+import { getDarkJoke } from "../helpers/getDarkJoke";
+import { JOKE_FLAGS } from "../helpers/getDarkJoke";
 import { capitalizeString } from "../helpers/capitalizeString";
-
-const STATIC_JOKE = {
-  setup: "Static setup?",
-  delivery: "This is a very funny static delivery.",
-};
 
 export const HomeScreen = ({ bottomSheetModalRef }) => {
   const [joke, setJoke] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [blacklist, setBlacklist] = useState([]);
+  const { bottom } = useSafeAreaInsets();
 
   useEffect(() => {
     getJoke();
   }, []);
 
+  // functions
   const getJoke = () => {
     setIsLoading(true);
     getDarkJoke(blacklist)
@@ -54,18 +49,17 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
     }
   };
 
-  const onCheckboxPress = (flag, checked) => {
+  const handleCheckboxPress = (flag, checked) => {
     if (checked) setBlacklist((prev) => [...prev, flag]);
     if (!checked) setBlacklist((prev) => prev.filter((item) => item !== flag));
   };
 
   return (
     <>
-      <AppScreen>
+      <AppScreen padded>
         <View
           style={{
-            flex: 0.9,
-            marginTop: 24,
+            flex: 1,
             justifyContent: "center",
           }}
         >
@@ -73,8 +67,8 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
         </View>
         <View
           style={{
-            width: "100%",
-            justifyContent: "center",
+            justifyContent: "flex-start",
+            paddingBottom: bottom + 16,
           }}
         >
           <AppButton
@@ -94,7 +88,7 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
               text={flag === "nsfw" ? "NSFW" : capitalizeString(flag)}
               key={index}
               onPress={(checked) => {
-                onCheckboxPress(flag, checked);
+                handleCheckboxPress(flag, checked);
               }}
               isChecked={blacklist.find((element) => element === flag)}
             />

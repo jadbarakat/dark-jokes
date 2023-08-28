@@ -1,35 +1,28 @@
+import { useCallback, useState } from "react";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AppScreen } from "../components/AppScreen";
 import { AppCard } from "../components/AppCard";
 import { AppText } from "../components/AppText";
 import { Alert, FlatList, Share, TouchableOpacity, View } from "react-native";
-
-import { Feather } from "@expo/vector-icons";
-import {
-  useFocusEffect,
-  useNavigation,
-  useTheme,
-} from "@react-navigation/native";
-import { useAtom } from "jotai";
-
-import { favouritesAtom } from "../state/globalStates";
+import { useFocusEffect, useTheme } from "@react-navigation/native";
+import { useHeaderHeight } from "@react-navigation/elements";
 import { AppButton } from "../components/AppButton";
-import { useCallback, useState } from "react";
 import { AppCheckbox } from "../components/AppCheckbox";
-
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { showAppToast } from "../helpers/showAppToast";
+import { Feather } from "@expo/vector-icons";
+import { useAtom } from "jotai";
+import { favouritesAtom } from "../state/globalStates";
 
 // TODO: figure out if you can animate checkboxes even though only their state is changing
-// TODO: add Toast feedback when deleting favourites
 
 export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
+  const { colors } = useTheme();
+  const { bottom } = useSafeAreaInsets();
+  const headerHeight = useHeaderHeight();
   const [favourites, setFavourites] = useAtom(favouritesAtom);
   const [favouritesToRemove, setFavouritesToRemove] = useState([]);
-  const { colors } = useTheme();
-  const insets = useSafeAreaInsets();
 
-  const navigation = useNavigation();
-
+  // handle what happens when user navigates away from the screen
   useFocusEffect(
     useCallback(() => {
       setIsEditing(false);
@@ -37,6 +30,7 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
     }, [])
   );
 
+  // functions
   const shareJoke = async (joke) => {
     const { setup, delivery } = joke;
     try {
@@ -47,20 +41,6 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
       Alert.alert(error.message);
     }
   };
-
-  const deleteAlert = (deleteFunction) =>
-    Alert.alert("Are you sure you want to do this?", null, [
-      {
-        text: "Cancel",
-        onPress: null,
-        style: "cancel",
-      },
-      {
-        text: "Delete",
-        onPress: deleteFunction,
-        style: "destructive",
-      },
-    ]);
 
   const bulkRemoveFavourites = () => {
     const favouritesClone = [...favourites];
@@ -85,13 +65,52 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
     });
   };
 
+  const deleteAlert = (deleteFunction) =>
+    Alert.alert("Are you sure you want to do this?", null, [
+      {
+        text: "Cancel",
+        onPress: null,
+        style: "cancel",
+      },
+      {
+        text: "Delete",
+        onPress: deleteFunction,
+        style: "destructive",
+      },
+    ]);
+
+  // screen components
   const EmptyView = () => {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: -headerHeight,
+        }}
+      >
         <AppCard>
           <AppText>You have no favourite jokes saved.</AppText>
         </AppCard>
       </View>
+    );
+  };
+
+  const LoadedView = () => {
+    return (
+      <FlatList
+        data={favourites}
+        renderItem={({ item, index }) => {
+          return isEditing ? (
+            <FavouritesEditingCard item={item} index={index} />
+          ) : (
+            <FavouritesCard item={item} index={index} />
+          );
+        }}
+        showsVerticalScrollIndicator={false}
+        style={{ paddingTop: 8 }}
+      />
     );
   };
 
@@ -122,7 +141,7 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
   };
 
   const FavouritesEditingCard = ({ item, index }) => {
-    const [isChecked, setIsChecked] = useState(
+    const [isChecked] = useState(
       favouritesToRemove.some((joke) => joke.jokeId === item.jokeId)
     );
 
@@ -156,38 +175,20 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
               disabled
             />
           </View>
-          <View style={{ flex: 0.8, paddingHorizontal: 8 }}>
+          <View style={{ flex: 0.9, paddingHorizontal: 8 }}>
             {item.setup && <AppText>{item.setup}</AppText>}
             <AppText fontWeight={item.setup ? 700 : 400}>
               {item.delivery}
             </AppText>
           </View>
-          <View style={{ flex: 0.1 }}></View>
         </View>
         <View style={{ height: 4, backgroundColor: colors.background }} />
       </TouchableOpacity>
     );
   };
 
-  const LoadedView = () => {
-    return (
-      <FlatList
-        data={favourites}
-        renderItem={({ item, index }) => {
-          return isEditing ? (
-            <FavouritesEditingCard item={item} index={index} />
-          ) : (
-            <FavouritesCard item={item} index={index} />
-          );
-        }}
-        showsVerticalScrollIndicator={false}
-        style={{ paddingTop: 8 }}
-      />
-    );
-  };
-
   return (
-    <AppScreen fullWidth>
+    <AppScreen>
       <View style={{ flex: 1 }}>
         {favourites.length === 0 ? <EmptyView /> : <LoadedView />}
       </View>
@@ -195,7 +196,7 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
         <View
           style={{
             justifyContent: "flex-start",
-            paddingBottom: insets.bottom,
+            paddingBottom: bottom,
           }}
         >
           <AppButton

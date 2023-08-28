@@ -1,12 +1,12 @@
 import React from "react";
 import { View } from "react-native";
 
-export const AppScreen = ({ children, fullWidth }) => {
+export const AppScreen = ({ children, padded }) => {
   return (
     <View
       style={{
         flex: 1,
-        paddingHorizontal: fullWidth ? 0 : 16,
+        paddingHorizontal: padded ? 16 : 0,
       }}
     >
       {children}

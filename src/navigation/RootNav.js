@@ -1,27 +1,25 @@
+import { useRef, useState } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-
 import { useTheme } from "@react-navigation/native";
+import { AppHeader } from "./AppHeader";
+import { AppDrawer } from "./AppDrawer";
 import { HomeScreen } from "../screens/HomeScreen";
 import { FavouritesScreen } from "../screens/FavouritesScreen";
-import { AppHeader } from "./AppHeader";
-
-import { Feather, FontAwesome5 } from "@expo/vector-icons";
-import { useRef, useState } from "react";
-import { AppIconButton } from "../components/AppIconButton";
-import { useAtom } from "jotai";
-import { playgroundAtom } from "../state/globalStates";
-import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { AppDrawer } from "./AppDrawer";
 import { Playground } from "../screens/Playground";
 import { AppToast } from "../components/AppToast";
+import { AppIconButton } from "../components/AppIconButton";
+import { Feather, FontAwesome5 } from "@expo/vector-icons";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { useAtom } from "jotai";
+import { favouritesAtom, playgroundAtom } from "../state/globalStates";
 
 const Drawer = createDrawerNavigator();
 
 export const RootNav = () => {
   const { colors } = useTheme();
   const [isEditing, setIsEditing] = useState(false);
-
   const [playgroundShown, setPlaygroundShown] = useAtom(playgroundAtom);
+  const [favourites] = useAtom(favouritesAtom);
 
   // bottomSheet stuff
   const bottomSheetModalRef = useRef(<BottomSheetModal />);
@@ -36,7 +34,7 @@ export const RootNav = () => {
     />
   );
 
-  const editIcon = (
+  const trashIcon = (
     <AppIconButton
       icon={<Feather name="trash-2" size={24} color={colors.text} />}
       onPress={() => setIsEditing(true)}
@@ -81,7 +79,13 @@ export const RootNav = () => {
             header: () => (
               <AppHeader
                 labelShown
-                iconRight={isEditing ? cancelIcon : editIcon}
+                iconRight={
+                  favourites.length < 1
+                    ? null
+                    : isEditing
+                    ? cancelIcon
+                    : trashIcon
+                }
               />
             ),
             drawerActiveTintColor: colors.primary,

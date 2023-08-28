@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
 import {
-  Dimensions,
   Platform,
   SafeAreaView,
   StatusBar,
-  Text,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import { AppText } from "../components/AppText";
 import { AppIconButton } from "../components/AppIconButton";
-
-import { Feather } from "@expo/vector-icons";
-import { useNavigation, useRoute, useTheme } from "@react-navigation/native";
 import { capitalizeString } from "../helpers/capitalizeString";
+import { useNavigation, useRoute, useTheme } from "@react-navigation/native";
+import { Feather } from "@expo/vector-icons";
 import { useAtom } from "jotai";
 import { playgroundAtom } from "../state/globalStates";
 
@@ -25,7 +21,6 @@ export const AppHeader = ({ labelShown, iconRight }) => {
   const navigation = useNavigation();
   const route = useRoute();
   const isAndroid = Platform.OS === "android";
-
   const [headerPressCount, setHeaderPressCount] = useState(0);
   const [playgroundShown, setPlaygroundShown] = useAtom(playgroundAtom);
 

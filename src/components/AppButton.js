@@ -1,5 +1,5 @@
 import React from "react";
-import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { AppText } from "./AppText";
 import { useTheme } from "@react-navigation/native";
 import { AppLightTheme } from "../styles/theme";
@@ -10,7 +10,6 @@ export const AppButton = ({
   icon,
   disabled,
   noBorderRadius,
-  ...props
 }) => {
   const { colors } = useTheme();
 
@@ -29,7 +28,6 @@ export const AppButton = ({
       onPress={onPress}
       activeOpacity={0.85}
       disabled={disabled}
-      {...props}
     >
       {icon && <View style={{ marginRight: 8 }}>{icon}</View>}
       <AppText color={disabled ? colors.card : AppLightTheme.colors.background}>

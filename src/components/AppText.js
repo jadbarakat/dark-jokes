@@ -1,6 +1,5 @@
+import { Text } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import React from "react";
-import { Text, View } from "react-native";
 
 export const AppText = ({
   children,

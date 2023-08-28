@@ -1,23 +1,30 @@
-import React, { useCallback, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { TouchableOpacity, View } from "react-native";
-
-import { BottomSheetBackdrop, BottomSheetModal } from "@gorhom/bottom-sheet";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import {
+  BottomSheetBackdrop,
+  BottomSheetModal,
+  BottomSheetView,
+  useBottomSheetDynamicSnapPoints,
+} from "@gorhom/bottom-sheet";
 import { useTheme } from "@react-navigation/native";
-import { AppButton } from "./AppButton";
-import { AppText } from "./AppText";
-import { AppIconButton } from "./AppIconButton";
-
 import { Feather } from "@expo/vector-icons";
 import { useAtom } from "jotai";
 import { themeAtom } from "../state/globalStates";
 
 export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
   const { colors } = useTheme();
+  const { bottom } = useSafeAreaInsets();
   const [theme] = useAtom(themeAtom);
+  const initialSnapPoints = useMemo(() => ["CONTENT_HEIGHT", "95%"]);
+  const {
+    animatedHandleHeight,
+    animatedSnapPoints,
+    animatedContentHeight,
+    handleContentLayout,
+  } = useBottomSheetDynamicSnapPoints(initialSnapPoints);
 
-  const snapPoints = useMemo(() => ["45%"]);
-
-  const closeModal = () => sheetRef.current?.close();
+  const handleCloseModal = () => sheetRef.current?.close();
 
   const renderBackdrop = useCallback(
     (props) => (
@@ -31,7 +38,7 @@ export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
     []
   );
 
-  const handleComponent = () => (
+  const customHandleComponent = () => (
     <View
       style={{ alignItems: "center", justifyContent: "center", height: 24 }}
     >
@@ -44,7 +51,7 @@ export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
         }}
       />
       <View style={{ position: "absolute", right: 16, top: 16 }}>
-        <TouchableOpacity activeOpacity={0.85} onPress={closeModal}>
+        <TouchableOpacity activeOpacity={0.85} onPress={handleCloseModal}>
           <Feather name="x" size={24} color={colors.text} />
         </TouchableOpacity>
       </View>
@@ -55,22 +62,25 @@ export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
     <BottomSheetModal
       ref={sheetRef}
       index={0}
-      snapPoints={snapPoints}
+      snapPoints={animatedSnapPoints}
+      handleHeight={animatedHandleHeight}
+      contentHeight={animatedContentHeight}
       backgroundStyle={{
         backgroundColor: colors.card,
       }}
-      handleComponent={handleComponent}
+      handleComponent={customHandleComponent}
       backdropComponent={renderBackdrop}
       onAnimate={onAnimate}
     >
-      <View
+      <BottomSheetView
         style={{
-          flex: 1,
           padding: 16,
+          paddingBottom: bottom + 16,
         }}
+        onLayout={handleContentLayout}
       >
         {children}
-      </View>
+      </BottomSheetView>
     </BottomSheetModal>
   );
 };

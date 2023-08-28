@@ -1,22 +1,18 @@
-import React from "react";
-import { Text, View } from "react-native";
-
+import { View } from "react-native";
+import { useTheme } from "@react-navigation/native";
 import {
   DrawerContentScrollView,
   DrawerItemList,
   DrawerItem,
 } from "@react-navigation/drawer";
-import { AppText } from "../components/AppText";
-import { useTheme } from "@react-navigation/native";
-
 import { Feather } from "@expo/vector-icons";
 import { useAtom } from "jotai";
 import { themeAtom } from "../state/globalStates";
 
 export const AppDrawer = (props) => {
+  const { colors } = useTheme();
   const [theme, setTheme] = useAtom(themeAtom);
   const isDark = theme === "dark";
-  const { colors } = useTheme();
 
   return (
     <DrawerContentScrollView contentContainerStyle={{}} {...props}>

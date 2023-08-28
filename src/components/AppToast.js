@@ -1,15 +1,11 @@
 import { View } from "react-native";
-
-import { AppDarkTheme } from "../styles/theme";
 import { useTheme } from "@react-navigation/native";
-
-import { Feather } from "@expo/vector-icons";
-
+import { AppDarkTheme } from "../styles/theme";
 import Toast, { BaseToast } from "react-native-toast-message";
+import { Feather, AntDesign } from "@expo/vector-icons";
 
 export const AppToast = () => {
   const { colors } = useTheme();
-
   const textColor = AppDarkTheme.colors.text;
 
   const toastConfig = {
@@ -127,13 +123,45 @@ export const AppToast = () => {
         )}
       />
     ),
+    warning: (props) => (
+      <BaseToast
+        {...props}
+        style={{
+          borderLeftColor: colors.warning,
+          width: "92%",
+          backgroundColor: colors.warning,
+        }}
+        contentContainerStyle={{
+          paddingHorizontal: 16,
+          backgroundColor: colors.warning,
+        }}
+        text1Style={{
+          fontSize: 16,
+          fontWeight: 600,
+          color: textColor,
+        }}
+        text2Style={{
+          fontSize: 14,
+          fontWeight: 400,
+          color: textColor,
+        }}
+        renderTrailingIcon={() => (
+          <View
+            style={{
+              backgroundColor: colors.warning,
+              alignItems: "center",
+              justifyContent: "center",
+              borderBottomRightRadius: 8,
+              borderTopRightRadius: 8,
+              paddingRight: 16,
+            }}
+          >
+            <AntDesign name="exclamationcircleo" size={24} color={textColor} />
+          </View>
+        )}
+      />
+    ),
   };
 
-  return (
-    <Toast
-      position="bottom"
-      //   bottomOffset={insets.bottom}
-      config={toastConfig}
-    />
-  );
+  return <Toast position="bottom" config={toastConfig} visibilityTime={3000} />;
 };

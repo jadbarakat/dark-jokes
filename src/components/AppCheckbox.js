@@ -1,9 +1,7 @@
+import { View } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import React from "react";
-import { Text, View } from "react-native";
-
-import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { AppText } from "./AppText";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 export const AppCheckbox = ({
   text,
