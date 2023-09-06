@@ -10,6 +10,7 @@ import { JokeCard } from "../components/JokeCard";
 import { getDarkJoke } from "../helpers/getDarkJoke";
 import { JOKE_FLAGS } from "../helpers/getDarkJoke";
 import { capitalizeString } from "../helpers/capitalizeString";
+import { showAppToast } from "../helpers/showAppToast";
 
 export const HomeScreen = ({ bottomSheetModalRef }) => {
   const [joke, setJoke] = useState({});
@@ -34,16 +35,26 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
         setIsLoading(false);
         LayoutAnimation.configureNext({
           duration: 700,
-          update: { type: "spring", springDamping: 0.4 },
+          update: { type: "spring", springDamping: 0.5 },
         });
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(() => {
+        showAppToast("error", "Error", "Something went wrong, try again.");
+        setIsLoading(false);
       });
   };
 
   const shareJoke = async () => {
     const { setup, delivery } = joke;
+
+    if (!delivery) {
+      return showAppToast(
+        "error",
+        "Error",
+        "Can't share a joke that doesn't exist."
+      );
+    }
+
     try {
       await Share.share({
         message: setup ? `${setup} ${delivery}` : delivery,

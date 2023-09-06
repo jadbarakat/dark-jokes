@@ -10,6 +10,7 @@ import { useAtom } from "jotai";
 import { favouritesAtom } from "../state/globalStates";
 import { AppSkeletonLoader } from "./AppSkeletonLoader";
 import { useState } from "react";
+import { showAppToast } from "../helpers/showAppToast";
 
 export const JokeCard = ({ joke, isLoading, shareJoke }) => {
   const { colors } = useTheme();
@@ -31,6 +32,13 @@ export const JokeCard = ({ joke, isLoading, shareJoke }) => {
   );
 
   const toggleFavourite = () => {
+    if (!delivery) {
+      return showAppToast(
+        "error",
+        "Error",
+        "Can't favourite a joke that doesn't exist."
+      );
+    }
     if (!isAFavourite)
       setFavourites([...favourites, { setup, delivery, jokeId }]);
     if (isAFavourite)
