@@ -1,4 +1,4 @@
-import { ActivityIndicator, Platform, ScrollView, View } from "react-native";
+import { ActivityIndicator, ScrollView, View } from "react-native";
 import { AppButton } from "./AppButton";
 import { AppCard } from "./AppCard";
 import { AppIconButton } from "./AppIconButton";
@@ -7,14 +7,17 @@ import { useTheme } from "@react-navigation/native";
 import { AppLightTheme } from "../styles/theme";
 import { Feather, FontAwesome } from "@expo/vector-icons";
 import { useAtom } from "jotai";
-import { favouritesAtom, themeAtom } from "../state/globalStates";
+import { favouritesAtom } from "../state/globalStates";
+import { AppSkeletonLoader } from "./AppSkeletonLoader";
+import { useState } from "react";
 
 export const JokeCard = ({ joke, isLoading, shareJoke }) => {
   const { colors } = useTheme();
   const { setup, delivery, jokeId } = joke;
-  const isAndroid = Platform.OS === "android";
   const [favourites, setFavourites] = useAtom(favouritesAtom);
   const isAFavourite = favourites.some((fav) => fav.jokeId === jokeId);
+
+  const [viewHeight, setViewHeight] = useState();
 
   const shareIcon = (
     <Feather name="share" size={20} color={AppLightTheme.colors.background} />
@@ -35,15 +38,40 @@ export const JokeCard = ({ joke, isLoading, shareJoke }) => {
   };
 
   const LoadingView = () => (
-    <ActivityIndicator
-      color={colors.text}
-      size={isAndroid ? "large" : "small"}
-    />
+    <View style={{ height: viewHeight, justifyContent: "center" }}>
+      {/* <View>
+        {!viewHeight < 201 && (
+          <View>
+            <AppSkeletonLoader color={colors.border} />
+          </View>
+        )}
+        <View
+          style={{
+            marginTop: viewHeight < 201 ? 0 : 16,
+          }}
+        >
+          <AppSkeletonLoader
+            color={colors.border}
+            height={viewHeight < 201 ? 40 : 100}
+          />
+        </View>
+      </View>
+      <View style={{ marginTop: 24, flexDirection: "row" }}>
+        <View style={{ flex: 1, marginRight: 8 }}>
+          <AppSkeletonLoader color={colors.border} />
+        </View>
+        <View style={{ flex: 0.2 }}>
+          <AppSkeletonLoader color={colors.border} />
+        </View>
+      </View> */}
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        <ActivityIndicator color={colors.text} size="large" />
+      </View>
+    </View>
   );
 
   const LoadedView = () => (
-    <View style={{ width: "100%", maxHeight: "98%" }}>
-      {/* TODO: figure out a better way to determine "long" jokes */}
+    <View onLayout={(e) => setViewHeight(e.nativeEvent.layout.height)}>
       {setup?.length + delivery?.length > 243 ? (
         <ScrollView showsVerticalScrollIndicator={false}>
           {setup && (

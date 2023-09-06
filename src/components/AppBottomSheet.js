@@ -30,7 +30,7 @@ export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
     (props) => (
       <BottomSheetBackdrop
         {...props}
-        opacity={theme === "dark" ? 0.8 : 0.3}
+        opacity={theme === "dark" ? 0.8 : 0.5}
         disappearsOnIndex={-1}
         appearsOnIndex={0}
       />
@@ -40,7 +40,11 @@ export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
 
   const customHandleComponent = () => (
     <View
-      style={{ alignItems: "center", justifyContent: "center", height: 24 }}
+      style={{
+        alignItems: "center",
+        justifyContent: "center",
+        height: 36,
+      }}
     >
       <View
         style={{
@@ -75,7 +79,7 @@ export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
       <BottomSheetView
         style={{
           padding: 16,
-          paddingBottom: bottom + 16,
+          paddingBottom: bottom + 36,
         }}
         onLayout={handleContentLayout}
       >

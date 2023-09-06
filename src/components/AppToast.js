@@ -15,14 +15,17 @@ export const AppToast = () => {
         style={{
           borderLeftColor: colors.success,
           backgroundColor: colors.success,
+          height: "auto",
           width: "92%",
         }}
         contentContainerStyle={{
           paddingHorizontal: 16,
+          paddingVertical: 16,
           backgroundColor: colors.success,
         }}
         text1Style={{
           fontSize: 16,
+          marginTop: -2,
           fontWeight: 600,
           color: textColor,
         }}
@@ -53,15 +56,18 @@ export const AppToast = () => {
         style={{
           borderLeftColor: colors.danger,
           width: "92%",
+          height: "auto",
           backgroundColor: colors.background,
         }}
         contentContainerStyle={{
+          paddingVertical: 16,
           paddingHorizontal: 16,
           backgroundColor: colors.danger,
         }}
         text1Style={{
           fontSize: 16,
           fontWeight: 600,
+          marginTop: -2,
           color: textColor,
         }}
         text2Style={{
@@ -91,15 +97,18 @@ export const AppToast = () => {
         style={{
           borderLeftColor: colors.info,
           width: "92%",
+          height: "auto",
           backgroundColor: colors.info,
         }}
         contentContainerStyle={{
+          paddingVertical: 16,
           paddingHorizontal: 16,
           backgroundColor: colors.info,
         }}
         text1Style={{
           fontSize: 16,
           fontWeight: 600,
+          marginTop: -2,
           color: textColor,
         }}
         text2Style={{
@@ -129,15 +138,18 @@ export const AppToast = () => {
         style={{
           borderLeftColor: colors.warning,
           width: "92%",
+          height: "auto",
           backgroundColor: colors.warning,
         }}
         contentContainerStyle={{
+          paddingVertical: 16,
           paddingHorizontal: 16,
           backgroundColor: colors.warning,
         }}
         text1Style={{
           fontSize: 16,
           fontWeight: 600,
+          marginTop: -2,
           color: textColor,
         }}
         text2Style={{

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Share, View } from "react-native";
+import { LayoutAnimation, Share, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AppBottomSheet } from "../components/AppBottomSheet";
 import { AppButton } from "../components/AppButton";
@@ -32,6 +32,10 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
           delivery: value.delivery,
         });
         setIsLoading(false);
+        LayoutAnimation.configureNext({
+          duration: 700,
+          update: { type: "spring", springDamping: 0.4 },
+        });
       })
       .catch((error) => {
         console.error(error);

@@ -42,6 +42,14 @@
       "eas": {
         "projectId": "d6f719dd-6b48-4206-8a03-c0ab1b2f36b3"
       }
-    }
+    },
+    "plugins": [
+      [
+        "expo-updates",
+        {
+          "username": "jadbarakat"
+        }
+      ]
+    ]
   }
 }

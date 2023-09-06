@@ -14,6 +14,7 @@ export const AppLightTheme = {
     warning: "#DB9B06",
     info: "#467C9B",
     orange: "#F38953",
+    skeleton: "#DDE3E3",
   },
 };
 
@@ -31,5 +32,6 @@ export const AppDarkTheme = {
     warning: "#DB9B06",
     info: "#467C9B",
     orange: "#EF611A",
+    skeleton: "#151D29",
   },
 };
