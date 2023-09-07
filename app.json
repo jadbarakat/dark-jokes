@@ -12,9 +12,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#151D29"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "userInterfaceStyle": "automatic",
       "supportsTablet": true,
@@ -35,7 +33,8 @@
         "image": "./assets/splash.png",
         "resizeMode": "contain",
         "backgroundColor": "#151D29"
-      }
+      },
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/favicon.png"
