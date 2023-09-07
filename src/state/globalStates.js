@@ -6,8 +6,10 @@ import { atomWithStorage, createJSONStorage } from "jotai/utils";
 
 const storage = createJSONStorage(() => AsyncStorage);
 
+const deviceTheme = Appearance.getColorScheme();
+
 // global state for app theme
-export const themeAtom = atomWithStorage("theme", "dark", storage);
+export const themeAtom = atom(deviceTheme);
 
 // global state for favourite jokes
 export const favouritesAtom = atomWithStorage("favourites", [], storage);

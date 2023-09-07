@@ -8,22 +8,22 @@ import * as Updates from "expo-updates";
 export default function App() {
   const { colors } = useTheme();
 
-  // const onFetchUpdateAsync = async () => {
-  //   try {
-  //     const update = await Updates.checkForUpdateAsync();
+  const onFetchUpdateAsync = async () => {
+    try {
+      const update = await Updates.checkForUpdateAsync();
 
-  //     if (update.isAvailable) {
-  //       await Updates.fetchUpdateAsync();
-  //       await Updates.reloadAsync();
-  //     }
-  //   } catch (error) {
-  //     alert(`Error fetching latest Expo update: ${error}`);
-  //   }
-  // };
+      if (update.isAvailable) {
+        await Updates.fetchUpdateAsync();
+        await Updates.reloadAsync();
+      }
+    } catch (error) {
+      // alert(`Error fetching latest Expo update: ${error}`);
+    }
+  };
 
-  // useEffect(() => {
-  //   onFetchUpdateAsync();
-  // });
+  useEffect(() => {
+    onFetchUpdateAsync();
+  });
 
   return (
     <Suspense fallback={<ActivityIndicator color={colors.text} size="large" />}>

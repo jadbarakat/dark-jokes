@@ -24,13 +24,13 @@ export const AppToast = () => {
           backgroundColor: colors.success,
         }}
         text1Style={{
-          fontSize: 16,
+          fontSize: 18,
           marginTop: -2,
           fontWeight: 600,
           color: textColor,
         }}
         text2Style={{
-          fontSize: 14,
+          fontSize: 16,
           fontWeight: 400,
           color: textColor,
         }}
@@ -65,13 +65,13 @@ export const AppToast = () => {
           backgroundColor: colors.danger,
         }}
         text1Style={{
-          fontSize: 16,
+          fontSize: 18,
           fontWeight: 600,
           marginTop: -2,
           color: textColor,
         }}
         text2Style={{
-          fontSize: 14,
+          fontSize: 16,
           fontWeight: 400,
           color: textColor,
         }}
@@ -106,13 +106,13 @@ export const AppToast = () => {
           backgroundColor: colors.info,
         }}
         text1Style={{
-          fontSize: 16,
+          fontSize: 18,
           fontWeight: 600,
           marginTop: -2,
           color: textColor,
         }}
         text2Style={{
-          fontSize: 14,
+          fontSize: 16,
           fontWeight: 400,
           color: textColor,
         }}
@@ -147,13 +147,13 @@ export const AppToast = () => {
           backgroundColor: colors.warning,
         }}
         text1Style={{
-          fontSize: 16,
+          fontSize: 18,
           fontWeight: 600,
           marginTop: -2,
           color: textColor,
         }}
         text2Style={{
-          fontSize: 14,
+          fontSize: 16,
           fontWeight: 400,
           color: textColor,
         }}

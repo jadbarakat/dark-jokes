@@ -19,6 +19,8 @@ export const JokeCard = ({ joke, isLoading, shareJoke }) => {
   const isAFavourite = favourites.some((fav) => fav.jokeId === jokeId);
 
   const [viewHeight, setViewHeight] = useState();
+  const [setupHeight, setSetupHeight] = useState();
+  const [deliveryHeight, setDeliveryHeight] = useState();
 
   const shareIcon = (
     <Feather name="share" size={20} color={AppLightTheme.colors.background} />
@@ -48,20 +50,18 @@ export const JokeCard = ({ joke, isLoading, shareJoke }) => {
   const LoadingView = () => (
     <View style={{ height: viewHeight, justifyContent: "center" }}>
       {/* <View>
-        {!viewHeight < 201 && (
-          <View>
-            <AppSkeletonLoader color={colors.border} />
-          </View>
+        {setup && (
+          <AppSkeletonLoader
+            color={colors.border}
+            style={{ height: setupHeight }}
+          />
         )}
         <View
           style={{
-            marginTop: viewHeight < 201 ? 0 : 16,
+            marginTop: 16,
           }}
         >
-          <AppSkeletonLoader
-            color={colors.border}
-            height={viewHeight < 201 ? 40 : 100}
-          />
+          <AppSkeletonLoader color={colors.border} height={deliveryHeight} />
         </View>
       </View>
       <View style={{ marginTop: 24, flexDirection: "row" }}>
@@ -83,7 +83,7 @@ export const JokeCard = ({ joke, isLoading, shareJoke }) => {
       {setup?.length + delivery?.length > 243 ? (
         <ScrollView showsVerticalScrollIndicator={false}>
           {setup && (
-            <View>
+            <View onLayout={(e) => setSetupHeight(e.nativeEvent.layout.height)}>
               <AppText fontSize={28}>{setup}</AppText>
             </View>
           )}
@@ -91,6 +91,7 @@ export const JokeCard = ({ joke, isLoading, shareJoke }) => {
             style={{
               marginTop: setup ? 16 : 0,
             }}
+            onLayout={(e) => setDeliveryHeight(e.nativeEvent.layout.height)}
           >
             <AppText fontWeight={setup ? 700 : 400} fontSize={30}>
               {delivery}

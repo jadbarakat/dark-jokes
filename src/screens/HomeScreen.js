@@ -35,7 +35,10 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
         setIsLoading(false);
         LayoutAnimation.configureNext({
           duration: 700,
-          update: { type: "spring", springDamping: 0.5 },
+          update: {
+            type: "spring",
+            springDamping: 0.6,
+          },
         });
       })
       .catch(() => {

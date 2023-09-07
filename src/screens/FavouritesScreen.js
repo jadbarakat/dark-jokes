@@ -3,7 +3,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AppScreen } from "../components/AppScreen";
 import { AppCard } from "../components/AppCard";
 import { AppText } from "../components/AppText";
-import { Alert, FlatList, Share, TouchableOpacity, View } from "react-native";
+import { Alert, ScrollView, Share, TouchableOpacity, View } from "react-native";
 import { useFocusEffect, useTheme } from "@react-navigation/native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { AppButton } from "../components/AppButton";
@@ -98,23 +98,16 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
   };
 
   const LoadedView = () => {
-    return (
-      <FlatList
-        data={favourites}
-        renderItem={({ item, index }) => {
-          return isEditing ? (
-            <FavouritesEditingCard item={item} index={index} />
-          ) : (
-            <FavouritesCard item={item} index={index} />
-          );
-        }}
-        showsVerticalScrollIndicator={false}
-        style={{ paddingTop: 8 }}
-      />
+    return favourites.map((favourite, index) =>
+      isEditing ? (
+        <FavouritesEditingCard item={favourite} index={index} key={index} />
+      ) : (
+        <FavouritesCard item={favourite} key={index} />
+      )
     );
   };
 
-  const FavouritesCard = ({ item, index }) => {
+  const FavouritesCard = ({ item }) => {
     return (
       <TouchableOpacity activeOpacity={0.8} onPress={() => shareJoke(item)}>
         <View
@@ -189,9 +182,14 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
 
   return (
     <AppScreen>
-      <View style={{ flex: 1 }}>
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        showsVerticalScrollIndicator={false}
+        scrollsToTop={false}
+        scrollEnabled={favourites.length !== 0}
+      >
         {favourites.length === 0 ? <EmptyView /> : <LoadedView />}
-      </View>
+      </ScrollView>
       {isEditing && (
         <View
           style={{
