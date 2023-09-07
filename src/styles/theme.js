@@ -5,7 +5,7 @@ export const AppLightTheme = {
   colors: {
     ...DefaultTheme.colors,
     primary: "#3B8491",
-    background: "#F4F6F6",
+    background: "#EBEBEB",
     card: "#FFF",
     border: "#DEDFE3",
     text: "#333",
