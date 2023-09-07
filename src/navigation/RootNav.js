@@ -72,7 +72,7 @@ export const RootNav = () => {
         <Drawer.Screen
           name="favourites"
           options={{
-            title: "Jaddy",
+            title: "Favourites",
             drawerIcon: ({ color, size }) => (
               <Feather name="star" color={color} size={size} />
             ),
