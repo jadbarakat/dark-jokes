@@ -20,7 +20,11 @@ export const DarkJokesApp = () => {
             <RootNav />
           </BottomSheetModalProvider>
         </NavigationContainer>
-        <StatusBar style={isDark ? "light" : "dark"} />
+        <StatusBar
+          translucent
+          animated={true}
+          style={isDark ? "light" : "dark"}
+        />
       </GestureHandlerRootView>
     </SafeAreaProvider>
   );

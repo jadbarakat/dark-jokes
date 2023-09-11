@@ -11,6 +11,7 @@ import { getDarkJoke } from "../helpers/getDarkJoke";
 import { JOKE_FLAGS } from "../helpers/getDarkJoke";
 import { capitalizeString } from "../helpers/capitalizeString";
 import { showAppToast } from "../helpers/showAppToast";
+import { shareJoke } from "../helpers/shareJoke";
 
 export const HomeScreen = ({ bottomSheetModalRef }) => {
   const [joke, setJoke] = useState({});
@@ -47,26 +48,6 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
       });
   };
 
-  const shareJoke = async () => {
-    const { setup, delivery } = joke;
-
-    if (!delivery) {
-      return showAppToast(
-        "error",
-        "Error",
-        "Can't share a joke that doesn't exist."
-      );
-    }
-
-    try {
-      await Share.share({
-        message: setup ? `${setup} ${delivery}` : delivery,
-      });
-    } catch (error) {
-      Alert.alert(error.message);
-    }
-  };
-
   const handleCheckboxPress = (flag, checked) => {
     if (checked) setBlacklist((prev) => [...prev, flag]);
     if (!checked) setBlacklist((prev) => prev.filter((item) => item !== flag));
@@ -81,7 +62,11 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
             justifyContent: "center",
           }}
         >
-          <JokeCard joke={joke} isLoading={isLoading} shareJoke={shareJoke} />
+          <JokeCard
+            joke={joke}
+            isLoading={isLoading}
+            shareJoke={() => shareJoke(joke)}
+          />
         </View>
         <View
           style={{

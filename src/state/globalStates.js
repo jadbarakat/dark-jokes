@@ -9,7 +9,7 @@ const storage = createJSONStorage(() => AsyncStorage);
 const deviceTheme = Appearance.getColorScheme();
 
 // global state for app theme
-export const themeAtom = atom(deviceTheme);
+export const themeAtom = atomWithStorage("theme", deviceTheme, storage);
 
 // global state for favourite jokes
 export const favouritesAtom = atomWithStorage("favourites", [], storage);

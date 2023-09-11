@@ -7,7 +7,7 @@ export const Playground = () => {
 
   return (
     <AppScreen padded>
-      <AppText>I am the Playground - use me to test stuff out!</AppText>
+      <AppText>EA Sports, it's in the game.</AppText>
     </AppScreen>
   );
 };

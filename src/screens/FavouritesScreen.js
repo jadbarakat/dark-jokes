@@ -12,6 +12,7 @@ import { showAppToast } from "../helpers/showAppToast";
 import { Feather } from "@expo/vector-icons";
 import { useAtom } from "jotai";
 import { favouritesAtom } from "../state/globalStates";
+import { shareJoke } from "../helpers/shareJoke";
 
 // TODO: figure out if you can animate checkboxes even though only their state is changing
 
@@ -29,18 +30,6 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
       setFavouritesToRemove([]);
     }, [])
   );
-
-  // functions
-  const shareJoke = async (joke) => {
-    const { setup, delivery } = joke;
-    try {
-      await Share.share({
-        message: setup ? `${setup} ${delivery}` : delivery,
-      });
-    } catch (error) {
-      Alert.alert(error.message);
-    }
-  };
 
   const bulkRemoveFavourites = () => {
     const favouritesClone = [...favourites];
