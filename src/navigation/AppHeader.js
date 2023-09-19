@@ -16,7 +16,7 @@ import { playgroundAtom } from "../state/globalStates";
 
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight;
 
-export const AppHeader = ({ labelShown, iconRight }) => {
+export const AppHeader = ({ labelShown, icons }) => {
   const { colors } = useTheme();
   const navigation = useNavigation();
   const route = useRoute();
@@ -40,7 +40,6 @@ export const AppHeader = ({ labelShown, iconRight }) => {
     >
       <View
         style={{
-          flex: 0.1,
           alignItems: "flex-start",
           paddingLeft: 4,
         }}
@@ -52,8 +51,7 @@ export const AppHeader = ({ labelShown, iconRight }) => {
       </View>
       <View
         style={{
-          flex: 0.8,
-          marginLeft: isAndroid ? 17 : 0,
+          marginLeft: 8,
           alignItems: isAndroid ? "flex-start" : "center",
           justifyContent: "center",
         }}
@@ -63,14 +61,21 @@ export const AppHeader = ({ labelShown, iconRight }) => {
             activeOpacity={1}
             onPress={() => setHeaderPressCount((prev) => prev + 1)}
           >
-            <AppText fontSize={20} fontWeight={600}>
+            <AppText fontSize={22} fontWeight={600}>
               {capitalizeString(route.name)}
             </AppText>
           </TouchableOpacity>
         )}
       </View>
-      <View style={{ flex: 0.1, alignItems: "flex-end", paddingRight: 4 }}>
-        {iconRight && iconRight}
+      <View
+        style={{
+          flexDirection: "row",
+          marginLeft: "auto",
+
+          paddingRight: 4,
+        }}
+      >
+        {icons && icons.map((icon, index) => <View key={index}>{icon}</View>)}
       </View>
     </SafeAreaView>
   );

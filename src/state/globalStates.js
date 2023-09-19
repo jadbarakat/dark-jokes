@@ -14,5 +14,12 @@ export const themeAtom = atomWithStorage("theme", deviceTheme, storage);
 // global state for favourite jokes
 export const favouritesAtom = atomWithStorage("favourites", [], storage);
 
+// global state for sorting favourite jokes
+export const favouritesAscendingAtom = atomWithStorage(
+  "favouritesAscending",
+  false,
+  storage
+);
+
 // global state to show or hide Playground page
 export const playgroundAtom = atom(false);

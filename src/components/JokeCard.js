@@ -34,6 +34,8 @@ export const JokeCard = ({ joke, isLoading, shareJoke }) => {
   );
 
   const toggleFavourite = () => {
+    const currentDate = Date.now();
+
     if (!delivery) {
       return showAppToast(
         "error",
@@ -42,39 +44,14 @@ export const JokeCard = ({ joke, isLoading, shareJoke }) => {
       );
     }
     if (!isAFavourite)
-      setFavourites([...favourites, { setup, delivery, jokeId }]);
+      setFavourites([...favourites, { setup, delivery, jokeId, currentDate }]);
     if (isAFavourite)
       setFavourites((prev) => prev.filter((fav) => fav.jokeId !== jokeId));
   };
 
   const LoadingView = () => (
-    <View style={{ height: viewHeight, justifyContent: "center" }}>
-      {/* <View>
-        {setup && (
-          <AppSkeletonLoader
-            color={colors.border}
-            style={{ height: setupHeight }}
-          />
-        )}
-        <View
-          style={{
-            marginTop: 16,
-          }}
-        >
-          <AppSkeletonLoader color={colors.border} height={deliveryHeight} />
-        </View>
-      </View>
-      <View style={{ marginTop: 24, flexDirection: "row" }}>
-        <View style={{ flex: 1, marginRight: 8 }}>
-          <AppSkeletonLoader color={colors.border} />
-        </View>
-        <View style={{ flex: 0.2 }}>
-          <AppSkeletonLoader color={colors.border} />
-        </View>
-      </View> */}
-      <View style={{ flex: 1, justifyContent: "center" }}>
-        <ActivityIndicator color={colors.text} size="large" />
-      </View>
+    <View style={{ justifyContent: "center", height: viewHeight }}>
+      <ActivityIndicator size="large" color={colors.text} />
     </View>
   );
 
@@ -83,7 +60,7 @@ export const JokeCard = ({ joke, isLoading, shareJoke }) => {
       {setup?.length + delivery?.length > 243 ? (
         <ScrollView showsVerticalScrollIndicator={false}>
           {setup && (
-            <View onLayout={(e) => setSetupHeight(e.nativeEvent.layout.height)}>
+            <View>
               <AppText fontSize={28}>{setup}</AppText>
             </View>
           )}
@@ -91,7 +68,6 @@ export const JokeCard = ({ joke, isLoading, shareJoke }) => {
             style={{
               marginTop: setup ? 16 : 0,
             }}
-            onLayout={(e) => setDeliveryHeight(e.nativeEvent.layout.height)}
           >
             <AppText fontWeight={setup ? 700 : 400} fontSize={30}>
               {delivery}

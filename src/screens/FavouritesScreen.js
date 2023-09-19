@@ -3,7 +3,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AppScreen } from "../components/AppScreen";
 import { AppCard } from "../components/AppCard";
 import { AppText } from "../components/AppText";
-import { Alert, ScrollView, Share, TouchableOpacity, View } from "react-native";
+import { Alert, ScrollView, TouchableOpacity, View } from "react-native";
 import { useFocusEffect, useTheme } from "@react-navigation/native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { AppButton } from "../components/AppButton";
@@ -11,7 +11,7 @@ import { AppCheckbox } from "../components/AppCheckbox";
 import { showAppToast } from "../helpers/showAppToast";
 import { Feather } from "@expo/vector-icons";
 import { useAtom } from "jotai";
-import { favouritesAtom } from "../state/globalStates";
+import { favouritesAscendingAtom, favouritesAtom } from "../state/globalStates";
 import { shareJoke } from "../helpers/shareJoke";
 
 // TODO: figure out if you can animate checkboxes even though only their state is changing
@@ -21,7 +21,14 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
   const { bottom } = useSafeAreaInsets();
   const headerHeight = useHeaderHeight();
   const [favourites, setFavourites] = useAtom(favouritesAtom);
+  const [favouritesAscending, setFavouritesAscending] = useAtom(
+    favouritesAscendingAtom
+  );
   const [favouritesToRemove, setFavouritesToRemove] = useState([]);
+
+  const orderedFavourites = favouritesAscending
+    ? favourites.sort((a, b) => a.currentDate - b.currentDate)
+    : favourites.sort((a, b) => b.currentDate - a.currentDate);
 
   // handle what happens when user navigates away from the screen
   useFocusEffect(
@@ -76,7 +83,7 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
-          marginTop: -headerHeight,
+          marginBottom: headerHeight,
         }}
       >
         <AppCard>
@@ -87,7 +94,7 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
   };
 
   const LoadedView = () => {
-    return favourites.map((favourite, index) =>
+    return orderedFavourites.map((favourite, index) =>
       isEditing ? (
         <FavouritesEditingCard item={favourite} index={index} key={index} />
       ) : (
@@ -96,9 +103,14 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
     );
   };
 
-  const FavouritesCard = ({ item }) => {
+  const FavouritesCard = ({ item, onLongPress, disabled }) => {
     return (
-      <TouchableOpacity activeOpacity={0.8} onPress={() => shareJoke(item)}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={() => shareJoke(item)}
+        onLongPress={onLongPress}
+        disabled={disabled}
+      >
         <View
           style={{
             backgroundColor: colors.card,

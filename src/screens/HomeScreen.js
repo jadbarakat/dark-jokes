@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { LayoutAnimation, Share, View } from "react-native";
+import { LayoutAnimation, Platform, UIManager, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AppBottomSheet } from "../components/AppBottomSheet";
 import { AppButton } from "../components/AppButton";
@@ -12,6 +12,12 @@ import { JOKE_FLAGS } from "../helpers/getDarkJoke";
 import { capitalizeString } from "../helpers/capitalizeString";
 import { showAppToast } from "../helpers/showAppToast";
 import { shareJoke } from "../helpers/shareJoke";
+
+if (Platform.OS === "android") {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
 
 export const HomeScreen = ({ bottomSheetModalRef }) => {
   const [joke, setJoke] = useState({});

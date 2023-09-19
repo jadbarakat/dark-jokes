@@ -8,10 +8,14 @@ import { FavouritesScreen } from "../screens/FavouritesScreen";
 import { Playground } from "../screens/Playground";
 import { AppToast } from "../components/AppToast";
 import { AppIconButton } from "../components/AppIconButton";
-import { Feather, FontAwesome5 } from "@expo/vector-icons";
+import { Feather, FontAwesome5, Octicons } from "@expo/vector-icons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useAtom } from "jotai";
-import { favouritesAtom, playgroundAtom } from "../state/globalStates";
+import {
+  favouritesAscendingAtom,
+  favouritesAtom,
+  playgroundAtom,
+} from "../state/globalStates";
 
 const Drawer = createDrawerNavigator();
 
@@ -19,6 +23,9 @@ export const RootNav = () => {
   const { colors } = useTheme();
   const [isEditing, setIsEditing] = useState(false);
   const [playgroundShown, setPlaygroundShown] = useAtom(playgroundAtom);
+  const [favouritesAscending, setFavouritesAscending] = useAtom(
+    favouritesAscendingAtom
+  );
   const [favourites] = useAtom(favouritesAtom);
 
   // bottomSheet stuff
@@ -48,6 +55,19 @@ export const RootNav = () => {
     />
   );
 
+  const sortIcon = (
+    <AppIconButton
+      icon={
+        <Octicons
+          name={favouritesAscending ? "sort-asc" : "sort-desc"}
+          size={24}
+          color={colors.text}
+        />
+      }
+      onPress={() => setFavouritesAscending(!favouritesAscending)}
+    />
+  );
+
   return (
     <>
       <Drawer.Navigator drawerContent={(props) => <AppDrawer {...props} />}>
@@ -58,7 +78,7 @@ export const RootNav = () => {
             drawerIcon: ({ color, size }) => (
               <FontAwesome5 name="laugh" color={color} size={size} />
             ),
-            header: () => <AppHeader iconRight={filterIcon} />,
+            header: () => <AppHeader icons={[filterIcon]} />,
             drawerActiveTintColor: colors.primary,
             drawerType: "slide",
             drawerLabelStyle: {
@@ -79,12 +99,12 @@ export const RootNav = () => {
             header: () => (
               <AppHeader
                 labelShown
-                iconRight={
+                icons={
                   favourites.length < 1
                     ? null
                     : isEditing
-                    ? cancelIcon
-                    : trashIcon
+                    ? [cancelIcon]
+                    : [sortIcon, trashIcon]
                 }
               />
             ),
@@ -109,7 +129,7 @@ export const RootNav = () => {
             name="playground"
             options={{
               title: "Playground",
-              drawerIcon: ({ color, size }) => (
+              drawerIcon: ({ size }) => (
                 <Feather
                   name="dribbble"
                   color={colors.orange}
