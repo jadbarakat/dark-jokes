@@ -11,6 +11,7 @@ Features:
 - Supports light and dark modes
 
 Screenshots:
+<img src="[https://your-image-url.type](https://github.com/jadbarakat/dark-jokes/assets/68382811/ff997457-9468-4484-bfea-46d6508d27f5)" width="100" height="100">
 ![dark-jokes-app-home](https://github.com/jadbarakat/dark-jokes/assets/68382811/ff997457-9468-4484-bfea-46d6508d27f5)
 ![dark-jokes-app-filter](https://github.com/jadbarakat/dark-jokes/assets/68382811/93baba09-c74e-49a5-9e30-c2d62580ad72)
 ![dark-jokes-app-share-joke-android](https://github.com/jadbarakat/dark-jokes/assets/68382811/36735933-bd8c-400d-9d63-607ff05cee6c)
