@@ -13,6 +13,8 @@ import { Feather } from "@expo/vector-icons";
 import { useAtom } from "jotai";
 import { favouritesAscendingAtom, favouritesAtom } from "../state/globalStates";
 import { shareJoke } from "../helpers/shareJoke";
+import FAB from "react-native-fab";
+import { AppFAB } from "../components/AppFAB";
 
 // TODO: figure out if you can animate checkboxes even though only their state is changing
 
@@ -39,6 +41,7 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
   );
 
   const bulkRemoveFavourites = () => {
+    if (favouritesToRemove.length < 1) return null;
     const favouritesClone = [...favourites];
     for (let value of favouritesToRemove) {
       const index = favouritesClone.indexOf(value);
@@ -86,7 +89,7 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
           marginBottom: headerHeight,
         }}
       >
-        <AppCard>
+        <AppCard padded>
           <AppText>You have no favourite jokes saved.</AppText>
         </AppCard>
       </View>
@@ -105,32 +108,32 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
 
   const FavouritesCard = ({ item, onLongPress, disabled }) => {
     return (
-      <TouchableOpacity
-        activeOpacity={0.8}
-        onPress={() => shareJoke(item)}
-        onLongPress={onLongPress}
-        disabled={disabled}
-      >
-        <View
-          style={{
-            backgroundColor: colors.card,
-            flexDirection: "row",
-            alignItems: "center",
-            padding: 16,
-          }}
+      <AppCard>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => shareJoke(item)}
+          onLongPress={onLongPress}
+          disabled={disabled}
         >
-          <View style={{ flex: 0.1, alignItems: "flex-start" }}>
-            <Feather name="share" size={24} color={colors.text} />
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              padding: 16,
+            }}
+          >
+            <View style={{ flex: 0.1, alignItems: "flex-start" }}>
+              <Feather name="share" size={24} color={colors.text} />
+            </View>
+            <View style={{ flex: 0.9, paddingHorizontal: 8 }}>
+              {item.setup && <AppText>{item.setup}</AppText>}
+              <AppText fontWeight={item.setup ? 700 : 400}>
+                {item.delivery}
+              </AppText>
+            </View>
           </View>
-          <View style={{ flex: 0.9, paddingHorizontal: 8 }}>
-            {item.setup && <AppText>{item.setup}</AppText>}
-            <AppText fontWeight={item.setup ? 700 : 400}>
-              {item.delivery}
-            </AppText>
-          </View>
-        </View>
-        <View style={{ height: 4, backgroundColor: colors.background }} />
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </AppCard>
     );
   };
 
@@ -148,41 +151,44 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
     };
 
     return (
-      <TouchableOpacity activeOpacity={1} onPress={() => onCheckboxPress(item)}>
-        <View
-          style={{
-            backgroundColor: colors.card,
-            flexDirection: "row",
-            alignItems: "center",
-            padding: 16,
-          }}
+      <AppCard>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => onCheckboxPress(item)}
         >
           <View
             style={{
-              flex: 0.1,
+              flexDirection: "row",
+              alignItems: "center",
+              padding: 16,
             }}
           >
-            <AppCheckbox
-              key={index}
-              onPress={() => {}}
-              isChecked={isChecked}
-              disabled
-            />
+            <View
+              style={{
+                flex: 0.1,
+              }}
+            >
+              <AppCheckbox
+                key={index}
+                onPress={() => {}}
+                isChecked={isChecked}
+                disabled
+              />
+            </View>
+            <View style={{ flex: 0.9, paddingHorizontal: 8 }}>
+              {item.setup && <AppText>{item.setup}</AppText>}
+              <AppText fontWeight={item.setup ? 700 : 400}>
+                {item.delivery}
+              </AppText>
+            </View>
           </View>
-          <View style={{ flex: 0.9, paddingHorizontal: 8 }}>
-            {item.setup && <AppText>{item.setup}</AppText>}
-            <AppText fontWeight={item.setup ? 700 : 400}>
-              {item.delivery}
-            </AppText>
-          </View>
-        </View>
-        <View style={{ height: 4, backgroundColor: colors.background }} />
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </AppCard>
     );
   };
 
   return (
-    <AppScreen>
+    <AppScreen padded>
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}
@@ -191,21 +197,7 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
       >
         {favourites.length === 0 ? <EmptyView /> : <LoadedView />}
       </ScrollView>
-      {isEditing && (
-        <View
-          style={{
-            justifyContent: "flex-start",
-            paddingBottom: bottom,
-          }}
-        >
-          <AppButton
-            title="Delete selected"
-            onPress={bulkRemoveFavourites}
-            disabled={favouritesToRemove.length === 0}
-            noBorderRadius
-          />
-        </View>
-      )}
+      <AppFAB onPress={bulkRemoveFavourites} visible={isEditing} />
     </AppScreen>
   );
 };

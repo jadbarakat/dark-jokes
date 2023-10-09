@@ -8,7 +8,6 @@ import { AppLightTheme } from "../styles/theme";
 import { Feather, FontAwesome } from "@expo/vector-icons";
 import { useAtom } from "jotai";
 import { favouritesAtom } from "../state/globalStates";
-import { AppSkeletonLoader } from "./AppSkeletonLoader";
 import { useState } from "react";
 import { showAppToast } from "../helpers/showAppToast";
 
@@ -19,8 +18,6 @@ export const JokeCard = ({ joke, isLoading, shareJoke }) => {
   const isAFavourite = favourites.some((fav) => fav.jokeId === jokeId);
 
   const [viewHeight, setViewHeight] = useState();
-  const [setupHeight, setSetupHeight] = useState();
-  const [deliveryHeight, setDeliveryHeight] = useState();
 
   const shareIcon = (
     <Feather name="share" size={20} color={AppLightTheme.colors.background} />
@@ -92,21 +89,8 @@ export const JokeCard = ({ joke, isLoading, shareJoke }) => {
           </View>
         </View>
       )}
-      <View style={{ marginTop: 24, flexDirection: "row" }}>
-        <View style={{ flex: 1, paddingRight: 8 }}>
-          <AppButton title="Share joke" icon={shareIcon} onPress={shareJoke} />
-        </View>
-        <View style={{ justifyContent: "center" }}>
-          <AppIconButton
-            icon={favouritesIcon}
-            filled
-            noBorder
-            onPress={toggleFavourite}
-          />
-        </View>
-      </View>
     </View>
   );
 
-  return <AppCard big>{isLoading ? <LoadingView /> : <LoadedView />}</AppCard>;
+  return <AppCard>{isLoading ? <LoadingView /> : <LoadedView />}</AppCard>;
 };

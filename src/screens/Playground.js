@@ -1,39 +1,43 @@
-import { AppText } from "../components/AppText";
+import Swiper from "react-native-swiper";
 import { AppScreen } from "../components/AppScreen";
+
+import { View } from "react-native";
+import { AppText } from "../components/AppText";
+import { Feather } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
-
-import DraggableFlatList from "react-native-draggable-flatlist";
-import { AppCard } from "../components/AppCard";
-import { useState } from "react";
-import { TouchableOpacity } from "react-native-gesture-handler";
-
-const DATA = [
-  { id: 1, firstName: "Jad", lastName: "Barakat" },
-  { id: 2, firstName: "Aiden", lastName: "Barakat" },
-  { id: 3, firstName: "Jad", lastName: "Barakat" },
-];
+import { AppButton } from "../components/AppButton";
+import { showAppToast } from "../helpers/showAppToast";
 
 export const Playground = () => {
-  const [data, setData] = useState(DATA);
-
-  const renderItem = ({ item, drag, isActive }) => {
-    return (
-      <AppCard>
-        <TouchableOpacity onLongPress={drag} disabled={isActive}>
-          <AppText>{item.firstName}</AppText>
-          <AppText>{item.lastName}</AppText>
-        </TouchableOpacity>
-      </AppCard>
-    );
-  };
+  const { colors } = useTheme();
 
   return (
     <AppScreen padded>
-      <DraggableFlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        onDragEnd={({ data }) => setData(data)}
+      <AppButton
+        title="Success"
+        onPress={() => showAppToast("success", "Success", "You did the thing.")}
+      />
+      <AppButton
+        title="Info"
+        onPress={() =>
+          showAppToast("info", "Info", "You enquired about the thing.")
+        }
+      />
+      <AppButton
+        title="Error"
+        onPress={() =>
+          showAppToast("error", "Error", "You fucked the thing up.")
+        }
+      />
+      <AppButton
+        title="Warning"
+        onPress={() =>
+          showAppToast(
+            "warning",
+            "Warning",
+            "You're about to fuck the thing up."
+          )
+        }
       />
     </AppScreen>
   );

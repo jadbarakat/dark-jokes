@@ -1,15 +1,27 @@
 import { TouchableOpacity } from "react-native";
 import { useTheme } from "@react-navigation/native";
+import { AppText } from "./AppText";
 
 const SIZE = 48;
 
-export const AppIconButton = ({ icon, onPress, filled, noBorder }) => {
+export const AppIconButton = ({
+  icon,
+  onPress,
+  filled,
+  noBorder,
+  disabled,
+  label,
+}) => {
   const { colors } = useTheme();
 
   return (
     <TouchableOpacity
       style={{
-        backgroundColor: filled ? colors.card : colors.background,
+        backgroundColor: filled
+          ? disabled
+            ? colors.border
+            : colors.card
+          : colors.background,
         height: SIZE,
         width: SIZE,
         borderRadius: SIZE,
@@ -20,6 +32,7 @@ export const AppIconButton = ({ icon, onPress, filled, noBorder }) => {
       }}
       activeOpacity={0.7}
       onPress={onPress}
+      disabled={disabled}
     >
       {icon}
     </TouchableOpacity>

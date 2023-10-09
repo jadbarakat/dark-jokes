@@ -54,11 +54,17 @@ export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
           backgroundColor: colors.text,
         }}
       />
-      <View style={{ position: "absolute", right: 16, top: 16 }}>
-        <TouchableOpacity activeOpacity={0.85} onPress={handleCloseModal}>
-          <Feather name="x" size={24} color={colors.text} />
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity
+        activeOpacity={0.85}
+        onPress={handleCloseModal}
+        style={{
+          position: "absolute",
+          right: 16,
+          top: 16,
+        }}
+      >
+        <Feather name="x" size={24} color={colors.text} />
+      </TouchableOpacity>
     </View>
   );
 
@@ -70,7 +76,7 @@ export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
       handleHeight={animatedHandleHeight}
       contentHeight={animatedContentHeight}
       backgroundStyle={{
-        backgroundColor: colors.card,
+        backgroundColor: colors.background,
       }}
       handleComponent={customHandleComponent}
       backdropComponent={renderBackdrop}

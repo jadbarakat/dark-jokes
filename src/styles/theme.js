@@ -15,6 +15,9 @@ export const AppLightTheme = {
     info: "#467C9B",
     orange: "#F38953",
     skeleton: "#DDE3E3",
+    disabled: "#A5ADB6",
+    white: "#FFF",
+    drawerText: "rgba(51, 51, 51, 0.68)",
   },
 };
 
@@ -33,5 +36,8 @@ export const AppDarkTheme = {
     info: "#467C9B",
     orange: "#EF611A",
     skeleton: "#151D29",
+    disabled: "#65707B",
+    white: "#FFF",
+    drawerText: "rgba(228, 235, 241, 0.68)",
   },
 };

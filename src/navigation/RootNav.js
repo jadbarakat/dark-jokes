@@ -8,7 +8,12 @@ import { FavouritesScreen } from "../screens/FavouritesScreen";
 import { Playground } from "../screens/Playground";
 import { AppToast } from "../components/AppToast";
 import { AppIconButton } from "../components/AppIconButton";
-import { Feather, FontAwesome5, Octicons } from "@expo/vector-icons";
+import {
+  Feather,
+  FontAwesome,
+  FontAwesome5,
+  Octicons,
+} from "@expo/vector-icons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useAtom } from "jotai";
 import {
@@ -75,7 +80,7 @@ export const RootNav = () => {
           name="home"
           options={{
             title: "Jokes",
-            drawerIcon: ({ color, size }) => (
+            drawerIcon: ({ color, size, focused }) => (
               <FontAwesome5 name="laugh" color={color} size={size} />
             ),
             header: () => <AppHeader icons={[filterIcon]} />,
@@ -93,8 +98,12 @@ export const RootNav = () => {
           name="favourites"
           options={{
             title: "Favourites",
-            drawerIcon: ({ color, size }) => (
-              <Feather name="star" color={color} size={size} />
+            drawerIcon: ({ color, size, focused }) => (
+              <FontAwesome
+                name={focused ? "star" : "star-o"}
+                color={color}
+                size={size}
+              />
             ),
             header: () => (
               <AppHeader

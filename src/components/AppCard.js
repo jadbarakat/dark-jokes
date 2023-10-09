@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { useTheme } from "@react-navigation/native";
 
-export const AppCard = ({ children, big }) => {
+export const AppCard = ({ children, padded }) => {
   const { colors } = useTheme();
 
   return (
@@ -9,14 +9,12 @@ export const AppCard = ({ children, big }) => {
       style={[
         {
           backgroundColor: colors.card,
-          minHeight: big ? 200 : null,
           borderRadius: 8,
           justifyContent: "center",
           borderWidth: 2,
           borderColor: colors.border,
-          paddingVertical: 24,
-          paddingHorizontal: 24,
-          marginBottom: 16,
+          padding: padded ? 24 : 0,
+          marginBottom: 8,
         },
         // TODO: had to hide this because LayoutAnimation is doing weird things with it - gotta figure out a way around it
         // theme === "light" ? shadow : null,

@@ -6,11 +6,17 @@ export const AppText = ({
   color,
   fontSize = 18,
   fontWeight = 400,
+  style,
 }) => {
   const { colors } = useTheme();
 
   return (
-    <Text style={{ fontSize, fontWeight, color: color ? color : colors.text }}>
+    <Text
+      style={[
+        style,
+        { fontSize, fontWeight, color: color ? color : colors.text },
+      ]}
+    >
       {children}
     </Text>
   );

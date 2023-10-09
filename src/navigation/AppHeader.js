@@ -52,6 +52,7 @@ export const AppHeader = ({ labelShown, icons }) => {
       <View
         style={{
           marginLeft: 8,
+          marginBottom: 2,
           alignItems: isAndroid ? "flex-start" : "center",
           justifyContent: "center",
         }}
@@ -71,7 +72,6 @@ export const AppHeader = ({ labelShown, icons }) => {
         style={{
           flexDirection: "row",
           marginLeft: "auto",
-
           paddingRight: 4,
         }}
       >

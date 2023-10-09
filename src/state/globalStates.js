@@ -14,12 +14,25 @@ export const themeAtom = atomWithStorage("theme", deviceTheme, storage);
 // global state for favourite jokes
 export const favouritesAtom = atomWithStorage("favourites", [], storage);
 
+// global state for blacklist
+export const blacklistAtom = atomWithStorage("blacklist", [], storage);
+
+// global state for app tint color
+export const tintAtom = atomWithStorage(
+  "tint",
+  { id: 0, name: "munsell", color: "#3B8491" },
+  storage
+);
+
 // global state for sorting favourite jokes
 export const favouritesAscendingAtom = atomWithStorage(
   "favouritesAscending",
   false,
   storage
 );
+
+// global state for minimal mode
+export const minimalModeAtom = atomWithStorage("minimal", false, storage);
 
 // global state to show or hide Playground page
 export const playgroundAtom = atom(false);

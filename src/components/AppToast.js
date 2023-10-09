@@ -16,7 +16,7 @@ export const AppToast = () => {
           borderLeftColor: colors.success,
           backgroundColor: colors.success,
           height: "auto",
-          width: "92%",
+          width: "95%",
         }}
         contentContainerStyle={{
           paddingHorizontal: 16,
