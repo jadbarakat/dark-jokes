@@ -27,7 +27,7 @@ export const AppDrawer = (props) => {
       <DrawerItemList {...props} />
       <View
         style={{
-          height: 2,
+          height: 3,
           backgroundColor: colors.border,
           marginTop: 8,
         }}

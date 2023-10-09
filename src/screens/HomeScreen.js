@@ -17,11 +17,7 @@ import { showAppToast } from "../helpers/showAppToast";
 import { shareJoke } from "../helpers/shareJoke";
 import { Feather, FontAwesome } from "@expo/vector-icons";
 import { useAtom } from "jotai";
-import {
-  blacklistAtom,
-  favouritesAtom,
-  minimalModeAtom,
-} from "../state/globalStates";
+import { favouritesAtom, minimalModeAtom } from "../state/globalStates";
 import { useTheme } from "@react-navigation/native";
 import Swiper from "react-native-swiper";
 

@@ -55,7 +55,7 @@ export const AppToast = () => {
         {...props}
         style={{
           borderLeftColor: colors.danger,
-          width: "92%",
+          width: "95%",
           height: "auto",
           backgroundColor: colors.background,
         }}
@@ -96,7 +96,7 @@ export const AppToast = () => {
         {...props}
         style={{
           borderLeftColor: colors.info,
-          width: "92%",
+          width: "95%",
           height: "auto",
           backgroundColor: colors.info,
         }}
@@ -137,7 +137,7 @@ export const AppToast = () => {
         {...props}
         style={{
           borderLeftColor: colors.warning,
-          width: "92%",
+          width: "95%",
           height: "auto",
           backgroundColor: colors.warning,
         }}
