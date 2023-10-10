@@ -20,12 +20,9 @@ import { AppFAB } from "../components/AppFAB";
 
 export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
   const { colors } = useTheme();
-  const { bottom } = useSafeAreaInsets();
   const headerHeight = useHeaderHeight();
   const [favourites, setFavourites] = useAtom(favouritesAtom);
-  const [favouritesAscending, setFavouritesAscending] = useAtom(
-    favouritesAscendingAtom
-  );
+  const [favouritesAscending] = useAtom(favouritesAscendingAtom);
   const [favouritesToRemove, setFavouritesToRemove] = useState([]);
 
   const orderedFavourites = favouritesAscending
@@ -61,6 +58,7 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
             : "Favourites removed."
         }`
       );
+      setFavouritesToRemove([]);
     });
   };
 

@@ -216,11 +216,7 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
   return (
     <>
       <AppScreen padded>
-        <Swiper showsPagination={false}>
-          <JokeComponent />
-          <JokeComponent />
-          <JokeComponent />
-        </Swiper>
+        <JokeComponent />
         <View
           style={{
             flex: 0.1,

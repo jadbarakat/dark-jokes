@@ -13,25 +13,29 @@ import { capitalizeString } from "../helpers/capitalizeString";
 export const AppDrawer = (props) => {
   const { colors } = useTheme();
   const [theme, setTheme] = useAtom(themeAtom);
-  const [tint, setTint] = useAtom(tintAtom);
+  const [appTint, setAppTint] = useAtom(tintAtom);
   const [minimalMode, setMinimalMode] = useAtom(minimalModeAtom);
   const isDark = theme === "dark";
   const isAndroid = Platform.OS === "android";
 
-  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+  const toggleTheme = () => setTheme(isDark ? "light" : "dark");
   const toggleMinimalMode = () => setMinimalMode(!minimalMode);
-  const changeTint = (selectedTint) => setTint(selectedTint);
+  const changeTint = (selectedTint) => setAppTint(selectedTint);
+
+  const Separator = () => (
+    <View
+      style={{
+        height: 3,
+        backgroundColor: colors.border,
+        marginTop: 8,
+      }}
+    />
+  );
 
   return (
     <DrawerContentScrollView contentContainerStyle={{}} {...props}>
       <DrawerItemList {...props} />
-      <View
-        style={{
-          height: 3,
-          backgroundColor: colors.border,
-          marginTop: 8,
-        }}
-      />
+      <Separator />
       <View
         style={{
           marginVertical: isAndroid ? 8 : 4,
@@ -81,34 +85,50 @@ export const AppDrawer = (props) => {
           />
         </TouchableOpacity>
         <View style={{ marginHorizontal: 17, paddingTop: 14 }}>
-          <AppText
-            fontSize={16}
-            fontWeight={500}
-            color={colors.drawerText}
-            style={{ paddingBottom: 12 }}
+          <View style={{ flexDirection: "row" }}>
+            <AppText
+              fontSize={16}
+              fontWeight={500}
+              color={colors.drawerText}
+              style={{ paddingBottom: 12 }}
+            >
+              {`Tint color: `}
+            </AppText>
+            <AppText
+              fontSize={16}
+              fontWeight={500}
+              color={colors.primary}
+              style={{ paddingBottom: 12 }}
+            >
+              {capitalizeString(appTint.name)}
+            </AppText>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              flexWrap: "wrap",
+            }}
           >
-            {`Tint color: ${capitalizeString(tint.name)}`}
-          </AppText>
-          <View style={{ flex: 1, flexDirection: "row", flexWrap: "wrap" }}>
-            {tints.map((possibleTint) => {
+            {tints.map((tint) => {
               const SIZE = 30;
-              const isActive = possibleTint.color === tint;
+              const isActive = tint.id === appTint.id;
 
               return (
                 <TouchableOpacity
-                  key={possibleTint.id}
+                  key={tint.id}
                   style={{
                     width: SIZE,
                     height: SIZE,
                     borderRadius: SIZE,
-                    backgroundColor: possibleTint.color,
+                    backgroundColor: tint.color,
                     marginRight: 16,
                     marginBottom: 8,
                     borderColor: colors.text,
                     borderWidth: isActive ? 2 : 0,
                   }}
                   activeOpacity={0.85}
-                  onPress={() => changeTint(possibleTint)}
+                  onPress={() => changeTint(tint)}
                 />
               );
             })}

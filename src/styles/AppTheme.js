@@ -11,8 +11,8 @@ export const AppTheme = (tint) => {
     colors: {
       ...DefaultTheme.colors,
       primary: tint.color,
-      background: "#F1F2F4",
-      card: "#FFF",
+      background: "#FFF",
+      card: "#F1F2F4",
       border: "#DCDFE4",
       text: "#161A1D",
       success: "#22A06B",
@@ -31,7 +31,7 @@ export const AppTheme = (tint) => {
     colors: {
       ...DarkTheme.colors,
       primary: tint.color,
-      background: "#161A1D",
+      background: "#1D2125",
       card: "#2C333A",
       border: "#22272B",
       text: "#DEE4EA",

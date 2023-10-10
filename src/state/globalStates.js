@@ -19,7 +19,7 @@ export const blacklistAtom = atomWithStorage("blacklist", [], storage);
 
 // global state for app tint color
 export const tintAtom = atomWithStorage(
-  "tint",
+  "appTint",
   { id: 0, name: "munsell", color: "#3B8491" },
   storage
 );
