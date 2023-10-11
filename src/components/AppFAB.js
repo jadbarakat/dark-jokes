@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Animated, TouchableOpacity } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export const AppFAB = ({ size = 56, visible, onPress, disabled = true }) => {
+export const AppFAB = ({ size = 56, visible, onPress, disabled }) => {
   const { colors } = useTheme();
   const { bottom } = useSafeAreaInsets();
 
