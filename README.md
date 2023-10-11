@@ -9,6 +9,8 @@ Features:
 - Add joke to favourites
 - Sort favourites by date added ascending or descending
 - Supports light and dark modes
+- Change app tint color with one tap
+- "Minimal mode"
 
 Interesting dependencies:
 - [expo](https://docs.expo.dev/)
