@@ -19,7 +19,6 @@ Screenshots:
   <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/6da688eb-b3a8-4408-9625-04509715c98b" width="40%" height="40%">
   <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/f8b15bb0-1740-470e-90ac-8ca2f0b35296" width="40%" height="40%">
   <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/1edbd60f-c4a9-44ff-91db-fac4f01c2138" width="40%" height="40%">
-  <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/e43066a5-bedb-436a-9407-dffd413d3907" width="40%" height="40%">
   <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/3c33f3fc-ff74-4a86-bfab-fd3bfec028fc" width="40%" height="40%">
 </div>
 
