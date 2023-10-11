@@ -20,7 +20,7 @@ export const AppTheme = (tint) => {
       warning: "#CF9F02",
       info: "#1D9AAA",
       orange: "#D97008",
-      disabled: "#8590A2",
+      disabled: "#758195",
       white: "#FFF",
       drawerText: "rgba(51, 51, 51, 0.68)",
     },
@@ -40,31 +40,12 @@ export const AppTheme = (tint) => {
       warning: "#B38600",
       info: "#206B74",
       orange: "#974F0C",
-      disabled: "#454F59",
+      disabled: "#596773",
       white: "#FFF",
       yellow: "#DB9B06",
       drawerText: "rgba(228, 235, 241, 0.68)",
     },
   };
-  // const AppDarkTheme = {
-  //   dark: true,
-  //   colors: {
-  //     ...DarkTheme.colors,
-  //     primary: tint,
-  //     background: "#151D29",
-  //     card: "#27353F",
-  //     border: "#405663",
-  //     text: "#E4EBF1",
-  //     success: "#096600",
-  //     danger: "#AC2020",
-  //     warning: "#DB9B06",
-  //     info: "#467C9B",
-  //     orange: "#EF611A",
-  //     disabled: "#65707B",
-  //     white: "#FFF",
-  //     drawerText: "rgba(228, 235, 241, 0.68)",
-  //   },
-  // };
 
   return isDark ? AppDarkTheme : AppLightTheme;
 };

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Animated, TouchableOpacity } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export const AppFAB = ({ size = 56, visible, onPress }) => {
+export const AppFAB = ({ size = 56, visible, onPress, disabled = true }) => {
   const { colors } = useTheme();
   const { bottom } = useSafeAreaInsets();
 
@@ -26,7 +26,7 @@ export const AppFAB = ({ size = 56, visible, onPress }) => {
             height: size,
             width: size,
             borderRadius: size,
-            backgroundColor: colors.primary,
+            backgroundColor: disabled ? colors.card : colors.primary,
             justifyContent: "center",
             alignItems: "center",
             position: "absolute",
@@ -35,8 +35,13 @@ export const AppFAB = ({ size = 56, visible, onPress }) => {
           }}
           activeOpacity={0.9}
           onPress={onPress}
+          disabled={disabled}
         >
-          <Feather name="trash-2" color={colors.white} size={24} />
+          <Feather
+            name="trash-2"
+            color={disabled ? colors.disabled : colors.white}
+            size={24}
+          />
         </TouchableOpacity>
       </Animated.View>
     )
