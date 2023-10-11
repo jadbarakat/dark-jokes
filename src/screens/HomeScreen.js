@@ -19,7 +19,6 @@ import { Feather, FontAwesome } from "@expo/vector-icons";
 import { useAtom } from "jotai";
 import { favouritesAtom, minimalModeAtom } from "../state/globalStates";
 import { useTheme } from "@react-navigation/native";
-import Swiper from "react-native-swiper";
 
 export const HomeScreen = ({ bottomSheetModalRef }) => {
   const [joke, setJoke] = useState({});
@@ -88,7 +87,7 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
         flex: 1 / actionButtons.length,
       }}
       onPress={onPress}
-      activeOpacity={0.7}
+      activeOpacity={0.75}
       disabled={isLoading}
     >
       {primary ? (
@@ -96,7 +95,7 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
           style={{
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: colors.card,
+            backgroundColor: isLoading ? colors.card : colors.primary,
             padding: 16,
             borderRadius: 24,
           }}
@@ -104,7 +103,7 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
           {icon}
           {!minimalMode && (
             <AppText
-              color={isLoading ? colors.disabled : colors.text}
+              color={isLoading ? colors.disabled : colors.white}
               fontWeight={primary ? 600 : 400}
               style={{ marginTop: 4 }}
             >
@@ -155,7 +154,7 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
         <Feather
           name="refresh-cw"
           size={24}
-          color={isLoading ? colors.disabled : colors.text}
+          color={isLoading ? colors.disabled : colors.white}
         />
       ),
       onPress: getJoke,

@@ -40,7 +40,7 @@ export const AppTheme = (tint) => {
       warning: "#B38600",
       info: "#206B74",
       orange: "#974F0C",
-      disabled: "#738496",
+      disabled: "#454F59",
       white: "#FFF",
       yellow: "#DB9B06",
       drawerText: "rgba(228, 235, 241, 0.68)",
