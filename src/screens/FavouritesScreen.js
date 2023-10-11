@@ -1,19 +1,16 @@
 import { useCallback, useState } from "react";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AppScreen } from "../components/AppScreen";
 import { AppCard } from "../components/AppCard";
 import { AppText } from "../components/AppText";
 import { Alert, ScrollView, TouchableOpacity, View } from "react-native";
 import { useFocusEffect, useTheme } from "@react-navigation/native";
 import { useHeaderHeight } from "@react-navigation/elements";
-import { AppButton } from "../components/AppButton";
 import { AppCheckbox } from "../components/AppCheckbox";
 import { showAppToast } from "../helpers/showAppToast";
 import { Feather } from "@expo/vector-icons";
 import { useAtom } from "jotai";
 import { favouritesAscendingAtom, favouritesAtom } from "../state/globalStates";
 import { shareJoke } from "../helpers/shareJoke";
-import FAB from "react-native-fab";
 import { AppFAB } from "../components/AppFAB";
 
 // TODO: figure out if you can animate checkboxes even though only their state is changing
@@ -195,7 +192,11 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
       >
         {favourites.length === 0 ? <EmptyView /> : <LoadedView />}
       </ScrollView>
-      <AppFAB onPress={bulkRemoveFavourites} visible={isEditing} />
+      <AppFAB
+        onPress={bulkRemoveFavourites}
+        visible={isEditing}
+        disabled={favouritesToRemove.length === 0}
+      />
     </AppScreen>
   );
 };
