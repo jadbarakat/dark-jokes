@@ -10,6 +10,14 @@ Features:
 - Sort favourites by date added ascending or descending
 - Supports light and dark modes
 
+Interesting dependencies:
+- [expo](https://docs.expo.dev/)
+- [react-navigation](https://reactnavigation.org/)
+- [jotai](https://jotai.org/)
+- [gorhom/bottom-sheet](https://gorhom.github.io/react-native-bottom-sheet/)
+- [react-native-toast-message](https://www.npmjs.com/package/react-native-toast-message)
+- [react-native-bouncy-checkbox](https://github.com/WrathChaos/react-native-bouncy-checkbox)
+
 Screenshots:
 <div>
   <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/ecaa8bc0-b89f-4520-86fd-135ab21fb92c" width="40%" height="40%">
