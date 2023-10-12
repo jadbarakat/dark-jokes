@@ -20,7 +20,7 @@ export const AppCheckbox = ({
         </View>
       }
       onPress={(checked) => onPress(checked)}
-      fillColor={colors.primary}
+      fillColor={disabled ? colors.disabled : colors.primary}
       innerIconStyle={{ borderRadius: 4 }}
       iconStyle={{ borderRadius: 4 }}
       size={24}

@@ -165,9 +165,8 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
             >
               <AppCheckbox
                 key={index}
-                onPress={() => {}}
+                onPress={() => onCheckboxPress(item)}
                 isChecked={isChecked}
-                disabled
               />
             </View>
             <View style={{ flex: 0.9, paddingHorizontal: 8 }}>
@@ -196,6 +195,11 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
         onPress={bulkRemoveFavourites}
         visible={isEditing}
         disabled={favouritesToRemove.length === 0}
+        style={{
+          position: "absolute",
+          bottom: 24,
+          right: 16,
+        }}
       />
     </AppScreen>
   );

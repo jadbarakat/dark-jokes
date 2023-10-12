@@ -2,11 +2,11 @@ import React from "react";
 import { TouchableOpacity, View } from "react-native";
 import { AppText } from "./AppText";
 import { useTheme } from "@react-navigation/native";
-import { AppLightTheme } from "../styles/theme";
 
 export const AppButton = ({
   title,
   onPress,
+  color,
   icon,
   disabled,
   noBorderRadius,
@@ -16,7 +16,11 @@ export const AppButton = ({
   return (
     <TouchableOpacity
       style={{
-        backgroundColor: disabled ? colors.border : colors.primary,
+        backgroundColor: disabled
+          ? colors.card
+          : color
+          ? color
+          : colors.primary,
         height: 50,
         borderRadius: noBorderRadius ? 0 : 4,
         alignItems: "center",
@@ -30,7 +34,7 @@ export const AppButton = ({
       disabled={disabled}
     >
       {icon && <View style={{ marginRight: 8 }}>{icon}</View>}
-      <AppText color={disabled ? colors.card : AppLightTheme.colors.background}>
+      <AppText color={disabled ? colors.disabled : colors.white}>
         {title}
       </AppText>
     </TouchableOpacity>

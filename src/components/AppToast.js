@@ -1,12 +1,11 @@
 import { View } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import { AppDarkTheme } from "../styles/theme";
 import Toast, { BaseToast } from "react-native-toast-message";
 import { Feather, AntDesign } from "@expo/vector-icons";
 
 export const AppToast = () => {
   const { colors } = useTheme();
-  const textColor = AppDarkTheme.colors.text;
+  const textColor = colors.white;
 
   const toastConfig = {
     success: (props) => (

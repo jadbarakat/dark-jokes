@@ -138,10 +138,10 @@ export const RootNav = () => {
             name="playground"
             options={{
               title: "Playground",
-              drawerIcon: ({ size }) => (
+              drawerIcon: ({ size, color }) => (
                 <Feather
                   name="dribbble"
-                  color={colors.orange}
+                  color={color}
                   size={size}
                   onPress={() => setPlaygroundShown(false)}
                 />
@@ -152,7 +152,6 @@ export const RootNav = () => {
               drawerLabelStyle: {
                 fontSize: 16,
                 marginLeft: -16,
-                color: colors.orange,
               },
             }}
           />
