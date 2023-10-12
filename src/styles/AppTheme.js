@@ -1,10 +1,9 @@
 import { DefaultTheme, DarkTheme } from "@react-navigation/native";
 import { useAtom } from "jotai";
-import { themeAtom } from "../state/globalStates";
+import { isDarkAtom } from "../state/globalStates";
 
 export const AppTheme = (tint) => {
-  const [theme] = useAtom(themeAtom);
-  const isDark = theme === "dark";
+  const [isDark] = useAtom(isDarkAtom);
 
   const AppLightTheme = {
     dark: false,

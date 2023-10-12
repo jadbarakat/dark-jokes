@@ -10,12 +10,12 @@ import {
 import { useTheme } from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
 import { useAtom } from "jotai";
-import { themeAtom } from "../state/globalStates";
+import { isDarkAtom } from "../state/globalStates";
 
 export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
   const { colors } = useTheme();
   const { bottom } = useSafeAreaInsets();
-  const [theme] = useAtom(themeAtom);
+  const [isDark] = useAtom(isDarkAtom);
   const initialSnapPoints = useMemo(() => ["CONTENT_HEIGHT", "95%"]);
   const {
     animatedHandleHeight,
@@ -30,7 +30,7 @@ export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
     (props) => (
       <BottomSheetBackdrop
         {...props}
-        opacity={theme === "dark" ? 0.8 : 0.5}
+        opacity={isDark ? 0.8 : 0.5}
         disappearsOnIndex={-1}
         appearsOnIndex={0}
       />
