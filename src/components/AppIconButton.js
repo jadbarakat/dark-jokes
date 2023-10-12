@@ -10,7 +10,6 @@ export const AppIconButton = ({
   filled,
   noBorder,
   disabled,
-  label,
 }) => {
   const { colors } = useTheme();
 

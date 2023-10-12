@@ -3,7 +3,6 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { RootNav } from "./navigation/RootNav";
-import { AppDarkTheme, AppLightTheme } from "./styles/theme";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { useAtom } from "jotai";
 import { themeAtom, tintAtom } from "./state/globalStates";

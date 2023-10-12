@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Animated, TouchableOpacity } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export const AppFAB = ({ size = 56, visible, onPress, disabled }) => {
+export const AppFAB = ({ size = 56, visible, onPress, style, disabled }) => {
   const { colors } = useTheme();
   const { bottom } = useSafeAreaInsets();
 
@@ -22,24 +22,24 @@ export const AppFAB = ({ size = 56, visible, onPress, disabled }) => {
     visible && (
       <Animated.View style={{ opacity }}>
         <TouchableOpacity
-          style={{
-            height: size,
-            width: size,
-            borderRadius: size,
-            backgroundColor: disabled ? colors.card : colors.primary,
-            justifyContent: "center",
-            alignItems: "center",
-            position: "absolute",
-            bottom: bottom + 24,
-            right: 16,
-          }}
+          style={[
+            {
+              height: size,
+              width: size,
+              borderRadius: size,
+              backgroundColor: disabled ? colors.disabled : colors.primary,
+              justifyContent: "center",
+              alignItems: "center",
+            },
+            style,
+          ]}
           activeOpacity={0.9}
           onPress={onPress}
           disabled={disabled}
         >
           <Feather
             name="trash-2"
-            color={disabled ? colors.disabled : colors.white}
+            color={disabled ? colors.card : colors.white}
             size={24}
           />
         </TouchableOpacity>

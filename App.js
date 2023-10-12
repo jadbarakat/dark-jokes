@@ -1,9 +1,7 @@
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import { ActivityIndicator } from "react-native";
 import { DarkJokesApp } from "./src/DarkJokesApp";
 import { useTheme } from "@react-navigation/native";
-
-import * as Updates from "expo-updates";
 
 export default function App() {
   const { colors } = useTheme();
