@@ -34,7 +34,7 @@
         "resizeMode": "contain",
         "backgroundColor": "#151D29"
       },
-      "versionCode": 3
+      "versionCode": 4
     },
     "web": {
       "favicon": "./assets/favicon.png"
