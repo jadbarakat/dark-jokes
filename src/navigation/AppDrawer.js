@@ -5,20 +5,19 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import { useAtom } from "jotai";
-import { minimalModeAtom, themeAtom, tintAtom } from "../state/globalStates";
+import { isDarkAtom, minimalModeAtom, tintAtom } from "../state/globalStates";
 import { AppText } from "../components/AppText";
 import { tints } from "../styles/tints";
 import { capitalizeString } from "../helpers/capitalizeString";
 
 export const AppDrawer = (props) => {
   const { colors } = useTheme();
-  const [theme, setTheme] = useAtom(themeAtom);
+  const [isDark, setIsDark] = useAtom(isDarkAtom);
   const [appTint, setAppTint] = useAtom(tintAtom);
   const [minimalMode, setMinimalMode] = useAtom(minimalModeAtom);
-  const isDark = theme === "dark";
   const isAndroid = Platform.OS === "android";
 
-  const toggleTheme = () => setTheme(isDark ? "light" : "dark");
+  const toggleTheme = () => setIsDark(!isDark);
   const toggleMinimalMode = () => setMinimalMode(!minimalMode);
   const changeTint = (selectedTint) => setAppTint(selectedTint);
 
@@ -33,7 +32,7 @@ export const AppDrawer = (props) => {
   );
 
   return (
-    <DrawerContentScrollView contentContainerStyle={{}} {...props}>
+    <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
       <Separator />
       <View
