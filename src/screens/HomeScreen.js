@@ -132,15 +132,9 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
     {
       id: 0,
       label: "Share",
-      icon: isAndroid ? (
+      icon: (
         <Feather
-          name="share-2"
-          size={24}
-          color={isLoading ? colors.disabled : colors.text}
-        />
-      ) : (
-        <Feather
-          name="share"
+          name={isAndroid ? "share-2" : "share"}
           size={24}
           color={isLoading ? colors.disabled : colors.text}
         />

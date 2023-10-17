@@ -2,7 +2,13 @@ import { useCallback, useState } from "react";
 import { AppScreen } from "../components/AppScreen";
 import { AppCard } from "../components/AppCard";
 import { AppText } from "../components/AppText";
-import { Alert, ScrollView, TouchableOpacity, View } from "react-native";
+import {
+  Alert,
+  Platform,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { useFocusEffect, useTheme } from "@react-navigation/native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { AppCheckbox } from "../components/AppCheckbox";
@@ -21,6 +27,7 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
   const [favourites, setFavourites] = useAtom(favouritesAtom);
   const [favouritesAscending] = useAtom(favouritesAscendingAtom);
   const [favouritesToRemove, setFavouritesToRemove] = useState([]);
+  const isAndroid = Platform.OS === "android";
 
   const orderedFavourites = favouritesAscending
     ? favourites.sort((a, b) => a.currentDate - b.currentDate)
@@ -118,7 +125,11 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
             }}
           >
             <View style={{ flex: 0.1, alignItems: "flex-start" }}>
-              <Feather name="share" size={24} color={colors.text} />
+              <Feather
+                name={isAndroid ? "share-2" : "share"}
+                size={24}
+                color={colors.text}
+              />
             </View>
             <View style={{ flex: 0.9, paddingHorizontal: 8 }}>
               {item.setup && <AppText>{item.setup}</AppText>}
