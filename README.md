@@ -20,6 +20,11 @@ Interesting dependencies:
 - [react-native-toast-message](https://www.npmjs.com/package/react-native-toast-message)
 - [react-native-bouncy-checkbox](https://github.com/WrathChaos/react-native-bouncy-checkbox)
 
+Things that are next on my to-do list:
+- Expand the list of dark jokes available because there's currently too many repeats
+- Add theme event listener so changes to device theme affects the app as well
+- Make the blacklist filter preferences persist through sessions
+
 Screenshots:
 <div>
   <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/ecaa8bc0-b89f-4520-86fd-135ab21fb92c" width="40%" height="40%">
