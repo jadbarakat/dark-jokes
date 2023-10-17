@@ -18,6 +18,7 @@ import { useAtom } from "jotai";
 import { favouritesAscendingAtom, favouritesAtom } from "../state/globalStates";
 import { shareJoke } from "../helpers/shareJoke";
 import { AppFAB } from "../components/AppFAB";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 // TODO: figure out if you can animate checkboxes even though only their state is changing
 
@@ -28,6 +29,7 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
   const [favouritesAscending] = useAtom(favouritesAscendingAtom);
   const [favouritesToRemove, setFavouritesToRemove] = useState([]);
   const isAndroid = Platform.OS === "android";
+  const { bottom } = useSafeAreaInsets();
 
   const orderedFavourites = favouritesAscending
     ? favourites.sort((a, b) => a.currentDate - b.currentDate)
@@ -195,7 +197,7 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
   return (
     <AppScreen padded>
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
+        contentContainerStyle={{ flexGrow: 1, paddingBottom: bottom }}
         showsVerticalScrollIndicator={false}
         scrollsToTop={false}
         scrollEnabled={favourites.length !== 0}
