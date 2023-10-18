@@ -21,7 +21,8 @@
         "resizeMode": "contain",
         "backgroundColor": "#151D29"
       },
-      "bundleIdentifier": "com.jadbarakat.darkjokes"
+      "bundleIdentifier": "com.jadbarakat.darkjokes",
+      "buildNumber": "2"
     },
     "android": {
       "userInterfaceStyle": "automatic",
@@ -35,7 +36,7 @@
         "resizeMode": "contain",
         "backgroundColor": "#151D29"
       },
-      "versionCode": 4
+      "versionCode": 5
     },
     "web": {
       "favicon": "./assets/favicon.png"
