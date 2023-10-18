@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Dark jokes",
+    "name": "Dark Jokes",
     "slug": "dark-jokes",
     "backgroundColor": "#151D29",
     "version": "1.0.0",
@@ -22,7 +22,7 @@
         "backgroundColor": "#151D29"
       },
       "bundleIdentifier": "com.jadbarakat.darkjokes",
-      "buildNumber": "2"
+      "buildNumber": "3"
     },
     "android": {
       "userInterfaceStyle": "automatic",
