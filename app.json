@@ -15,14 +15,14 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "userInterfaceStyle": "automatic",
-      "supportsTablet": true,
+      "supportsTablet": false,
       "splash": {
         "image": "./assets/splash.png",
         "resizeMode": "contain",
         "backgroundColor": "#151D29"
       },
       "bundleIdentifier": "com.jadbarakat.darkjokes",
-      "buildNumber": "3"
+      "buildNumber": "4"
     },
     "android": {
       "userInterfaceStyle": "automatic",
