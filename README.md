@@ -28,13 +28,12 @@ Things that are next on my to-do list:
 
 Screenshots:
 <div>
-  <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/ecaa8bc0-b89f-4520-86fd-135ab21fb92c" width="40%" height="40%">
-  <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/53f07114-a618-472b-9a34-78ebdb18545e" width="40%" height="40%">
-  <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/4843276b-3366-40e3-ba54-391eb736c0f6" width="40%" height="40%">
-  <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/8c87fdc6-0220-4980-8a80-e5786e46ada1" width="40%" height="40%">
-  <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/6da688eb-b3a8-4408-9625-04509715c98b" width="40%" height="40%">
-  <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/f8b15bb0-1740-470e-90ac-8ca2f0b35296" width="40%" height="40%">
-  <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/1edbd60f-c4a9-44ff-91db-fac4f01c2138" width="40%" height="40%">
-  <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/3c33f3fc-ff74-4a86-bfab-fd3bfec028fc" width="40%" height="40%">
+  <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/8fbf1a0c-3e6a-47ed-8a9a-8fcc84058a07" width="40%" height="40%">
+  <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/460d9180-eed1-4e80-bcb8-9393217b09d8" width="40%" height="40%">
+  <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/40114da3-943f-4568-853a-594162ee3c09" width="40%" height="40%">
+  <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/27cbf248-05aa-4e6d-81c7-7ac926a4e87d" width="40%" height="40%">
+  <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/34d19477-5f81-4bb0-b68c-bd8421d31dec" width="40%" height="40%">
+  <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/23bd20bd-40bf-43e4-bf47-fda753885d63" width="40%" height="40%">
 </div>
 
+Please note this is a project I worked on as a hobby to practice my development skills - hope you like it 🙂
