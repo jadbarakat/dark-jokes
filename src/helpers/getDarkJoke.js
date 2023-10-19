@@ -3,7 +3,10 @@ import axios from "axios";
 export const getDarkJoke = async (blacklist) => {
   const blacklistText = blacklist.join(",");
 
-  const URL = `https://v2.jokeapi.dev/joke/Dark/Any?blacklistFlags=${blacklistText}`;
+  const URL =
+    blacklist.length !== 0
+      ? `https://v2.jokeapi.dev/joke/Dark?blacklistFlags=${blacklistText}`
+      : `https://v2.jokeapi.dev/joke/Dark`;
 
   const options = {
     method: "GET",
