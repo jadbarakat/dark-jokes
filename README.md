@@ -1,4 +1,4 @@
-# dark-jokes
+# Dark Jokes
 
 Mobile app made with React Native to surface [Sv443's JokeAPI](https://sv443.net/jokeapi/v2/)'s collection of dark jokes.
 
