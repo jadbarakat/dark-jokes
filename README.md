@@ -26,6 +26,8 @@ Things that are next on my to-do list:
 - Add theme event listener so changes to device theme affects the app as well
 - Make the blacklist filter preferences persist through sessions
 
+Please note this is a project I worked on as a hobby to practice my development skills - still honing them 😀
+
 Screenshots:
 <div>
   <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/8fbf1a0c-3e6a-47ed-8a9a-8fcc84058a07" width="40%" height="40%">
@@ -35,5 +37,3 @@ Screenshots:
   <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/34d19477-5f81-4bb0-b68c-bd8421d31dec" width="40%" height="40%">
   <img src="https://github.com/jadbarakat/dark-jokes/assets/68382811/23bd20bd-40bf-43e4-bf47-fda753885d63" width="40%" height="40%">
 </div>
-
-Please note this is a project I worked on as a hobby to practice my development skills - hope you like it 🙂
