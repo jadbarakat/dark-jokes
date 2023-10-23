@@ -2,7 +2,7 @@
 
 Mobile app made with React Native to surface [Sv443's JokeAPI](https://sv443.net/jokeapi/v2/)'s collection of dark jokes.
 
-Android app available on [Google Play]([url](https://tinyurl.com/25e4aey4))
+Android app available on [Google Play](https://tinyurl.com/25e4aey4)
 
 Features:
 - Get a random dark joke
