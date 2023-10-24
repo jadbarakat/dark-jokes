@@ -13,7 +13,7 @@ Features:
 - Supports light and dark modes
 - Change app tint color with one tap
 - "Minimal mode"
-- Easter egg - just open the Favourites screen and tap on the title 5 times to reveal a Playground screen 🙂
+- Easter egg 🥚 - just open the Favourites screen and tap on the title 5 times to reveal a Playground screen 🙂
 
 Interesting dependencies:
 - [expo](https://docs.expo.dev/)
