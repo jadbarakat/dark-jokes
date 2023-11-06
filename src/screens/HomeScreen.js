@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Platform,
+  Switch,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -10,24 +11,28 @@ import { AppBottomSheet } from "../components/AppBottomSheet";
 import { AppCheckbox } from "../components/AppCheckbox";
 import { AppScreen } from "../components/AppScreen";
 import { AppText } from "../components/AppText";
-import { getDarkJoke } from "../helpers/getDarkJoke";
-import { JOKE_FLAGS } from "../helpers/getDarkJoke";
+import { JOKE_CATEGORIES, getDarkJoke } from "../helpers/getDarkJoke";
 import { capitalizeString } from "../helpers/capitalizeString";
 import { showAppToast } from "../helpers/showAppToast";
 import { shareJoke } from "../helpers/shareJoke";
 import { Feather, FontAwesome } from "@expo/vector-icons";
 import { useAtom } from "jotai";
-import { favouritesAtom, minimalModeAtom } from "../state/globalStates";
+import {
+  categoriesAtom,
+  favouritesAtom,
+  minimalModeAtom,
+} from "../state/globalStates";
 import { useTheme } from "@react-navigation/native";
 
 export const HomeScreen = ({ bottomSheetModalRef }) => {
   const [joke, setJoke] = useState({});
   const [isLoading, setIsLoading] = useState();
-  const [blacklist, setBlacklist] = useState([]);
+  const [isSafe, setIsSafe] = useState(true);
   const { bottom } = useSafeAreaInsets();
   const isAndroid = Platform.OS === "android";
 
   const [minimalMode] = useAtom(minimalModeAtom);
+  const [categories, setCategories] = useAtom(categoriesAtom);
 
   const { colors } = useTheme();
 
@@ -41,7 +46,7 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
   // functions
   const getJoke = () => {
     setIsLoading(true);
-    getDarkJoke(blacklist)
+    getDarkJoke(categories, isSafe)
       .then((value) => {
         setJoke({
           jokeId: value.jokeId,
@@ -75,8 +80,9 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
   };
 
   const handleCheckboxPress = (flag, checked) => {
-    if (checked) setBlacklist((prev) => [...prev, flag]);
-    if (!checked) setBlacklist((prev) => prev.filter((item) => item !== flag));
+    if (checked) setCategories(() => [...categories, flag]);
+    if (!checked)
+      setCategories(() => categories.filter((item) => item !== flag));
   };
 
   // components
@@ -233,20 +239,51 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
       </AppScreen>
       <AppBottomSheet sheetRef={bottomSheetModalRef}>
         <View style={{ marginBottom: 8 }}>
-          <AppText fontSize={24}>Don't show me jokes that are</AppText>
+          <AppText fontSize={24}>Filter by category</AppText>
         </View>
-        {JOKE_FLAGS.map((flag, index) => {
+        {JOKE_CATEGORIES.map((category, index) => {
           return (
             <AppCheckbox
-              text={flag === "nsfw" ? "NSFW" : capitalizeString(flag)}
+              text={
+                category === "misc"
+                  ? "Miscellaneous"
+                  : capitalizeString(category)
+              }
               key={index}
               onPress={(checked) => {
-                handleCheckboxPress(flag, checked);
+                handleCheckboxPress(category, checked);
               }}
-              isChecked={blacklist.find((element) => element === flag)}
+              isChecked={categories.find((element) => element === category)}
             />
           );
         })}
+        <View
+          style={{
+            height: 3,
+            backgroundColor: colors.card,
+            marginTop: 8,
+          }}
+        />
+        <View
+          style={{
+            paddingVertical: isAndroid ? 8 : 16,
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <AppText style={{ paddingRight: 16 }}>Safe mode</AppText>
+            <Switch
+              value={isSafe}
+              onChange={() => setIsSafe(!isSafe)}
+              thumbColor={colors.white}
+              trackColor={{ true: colors.primary, false: colors.disabled }}
+            />
+          </View>
+        </View>
       </AppBottomSheet>
     </>
   );

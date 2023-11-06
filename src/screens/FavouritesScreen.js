@@ -159,7 +159,7 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
     };
 
     return (
-      <AppCard>
+      <AppCard selected={isChecked}>
         <TouchableOpacity
           activeOpacity={1}
           onPress={() => onCheckboxPress(item)}

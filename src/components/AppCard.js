@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { useTheme } from "@react-navigation/native";
 
-export const AppCard = ({ children, padded }) => {
+export const AppCard = ({ children, padded, selected }) => {
   const { colors } = useTheme();
 
   return (
@@ -12,7 +12,7 @@ export const AppCard = ({ children, padded }) => {
           borderRadius: 8,
           justifyContent: "center",
           borderWidth: 2,
-          borderColor: colors.border,
+          borderColor: selected ? colors.primary : colors.border,
           padding: padded ? 24 : 0,
           marginBottom: 8,
         },

@@ -15,8 +15,6 @@ export const isDarkAtom = atomWithStorage(
 
 export const favouritesAtom = atomWithStorage("favourites", [], storage);
 
-export const blacklistAtom = atomWithStorage("blacklist", [], storage);
-
 export const tintAtom = atomWithStorage("appTint", tints[0], storage);
 
 export const favouritesAscendingAtom = atomWithStorage(
@@ -24,6 +22,8 @@ export const favouritesAscendingAtom = atomWithStorage(
   false,
   storage
 );
+
+export const categoriesAtom = atomWithStorage("categories", [], storage);
 
 export const minimalModeAtom = atomWithStorage("minimal", false, storage);
 
