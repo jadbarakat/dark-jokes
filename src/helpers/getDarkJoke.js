@@ -1,12 +1,21 @@
 import axios from "axios";
 
-export const getDarkJoke = async (blacklist) => {
-  const blacklistText = blacklist.join(",");
+export const getDarkJoke = async (categories, isSafe) => {
+  // const blacklistText = blacklist.join(",");
+  const chosenCategories = categories.join(",");
+
+  const baseURL = "https://v2.jokeapi.dev/joke/";
+  const safeURL = isSafe ? "?safe-mode" : "";
+
+  // const URL =
+  //   blacklist.length !== 0
+  //     ? `https://v2.jokeapi.dev/joke/Dark?blacklistFlags=${blacklistText}`
+  //     : `https://v2.jokeapi.dev/joke/Dark`;
 
   const URL =
-    blacklist.length !== 0
-      ? `https://v2.jokeapi.dev/joke/Dark?blacklistFlags=${blacklistText}`
-      : `https://v2.jokeapi.dev/joke/Dark`;
+    categories.length === 0
+      ? `${baseURL}Any${safeURL}`
+      : `${baseURL}${chosenCategories}`;
 
   const options = {
     method: "GET",
@@ -39,4 +48,13 @@ export const JOKE_FLAGS = [
   "racist",
   "sexist",
   "explicit",
+];
+
+export const JOKE_CATEGORIES = [
+  "programming",
+  "misc",
+  "dark",
+  "pun",
+  "spooky",
+  "christmas",
 ];
