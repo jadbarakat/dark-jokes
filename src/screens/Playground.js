@@ -15,6 +15,7 @@ import { tints } from "../styles/tints";
 import { Feather } from "@expo/vector-icons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useAtom } from "jotai";
+import { AppSeparator } from "../components/AppSeparator";
 
 export const Playground = () => {
   const { colors } = useTheme();
@@ -157,6 +158,17 @@ export const Playground = () => {
     </ViewComponent>
   );
 
+  const AppSeparatorDemo = () => (
+    <ViewComponent>
+      <AppText fontSize={20} fontWeight={600} style={{ paddingBottom: 4 }}>
+        AppSeparator
+      </AppText>
+      <AppSeparator />
+      <AppSeparator color={colors.primary} />
+      <AppSeparator height={5} />
+    </ViewComponent>
+  );
+
   const AppTextDemo = () => (
     <ViewComponent>
       <AppText fontSize={20} fontWeight={600} style={{ paddingBottom: 4 }}>
@@ -218,6 +230,7 @@ export const Playground = () => {
         <AppCheckboxDemo />
         <AppFABDemo />
         <AppIconButtonDemo />
+        <AppSeparatorDemo />
         <AppTextDemo />
         <AppToastDemo />
       </ScrollView>
