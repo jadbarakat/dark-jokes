@@ -23,6 +23,7 @@ import {
   minimalModeAtom,
 } from "../state/globalStates";
 import { useTheme } from "@react-navigation/native";
+import { AppSeparator } from "../components/AppSeparator";
 
 export const HomeScreen = ({ bottomSheetModalRef }) => {
   const [joke, setJoke] = useState({});
@@ -257,16 +258,10 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
             />
           );
         })}
+        <AppSeparator />
         <View
           style={{
-            height: 3,
-            backgroundColor: colors.card,
-            marginTop: 8,
-          }}
-        />
-        <View
-          style={{
-            paddingVertical: isAndroid ? 8 : 16,
+            paddingVertical: isAndroid ? 0 : 8,
           }}
         >
           <View
