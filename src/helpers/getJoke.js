@@ -1,16 +1,10 @@
 import axios from "axios";
 
-export const getDarkJoke = async (categories, isSafe) => {
-  // const blacklistText = blacklist.join(",");
+export const getJoke = async (categories, isSafe) => {
   const chosenCategories = categories.join(",");
 
   const baseURL = "https://v2.jokeapi.dev/joke/";
   const safeURL = isSafe ? "?safe-mode" : "";
-
-  // const URL =
-  //   blacklist.length !== 0
-  //     ? `https://v2.jokeapi.dev/joke/Dark?blacklistFlags=${blacklistText}`
-  //     : `https://v2.jokeapi.dev/joke/Dark`;
 
   const URL =
     categories.length === 0

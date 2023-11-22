@@ -25,6 +25,8 @@ export const favouritesAscendingAtom = atomWithStorage(
 
 export const categoriesAtom = atomWithStorage("categories", [], storage);
 
+export const isOnboardingAtom = atomWithStorage("isOnboarding", true, storage);
+
 export const minimalModeAtom = atomWithStorage("minimal", false, storage);
 
 export const playgroundAtom = atom(false);

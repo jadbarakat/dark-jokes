@@ -4,13 +4,12 @@ import { useTheme } from "@react-navigation/native";
 import { AppBottomSheet } from "../components/AppBottomSheet";
 import { AppButton } from "../components/AppButton";
 import { AppCard } from "../components/AppCard";
-import { AppCheckbox } from "../components/AppCheckbox";
 import { AppFAB } from "../components/AppFAB";
 import { AppIconButton } from "../components/AppIconButton";
 import { AppScreen } from "../components/AppScreen";
 import { AppText } from "../components/AppText";
 import { showAppToast } from "../helpers/showAppToast";
-import { tintAtom } from "../state/globalStates";
+import { isOnboardingAtom, tintAtom } from "../state/globalStates";
 import { tints } from "../styles/tints";
 import { Feather } from "@expo/vector-icons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
@@ -20,6 +19,8 @@ import { AppSeparator } from "../components/AppSeparator";
 export const Playground = () => {
   const { colors } = useTheme();
   const [appTint, setAppTint] = useAtom(tintAtom);
+
+  const [isOnboarding, setIsOnBoarding] = useAtom(isOnboardingAtom);
 
   const sheetRef = useRef(<BottomSheetModal />);
   const openModal = () => sheetRef.current?.present();
@@ -69,6 +70,10 @@ export const Playground = () => {
             }
           }}
         />
+        <AppButton
+          title="Go to Onboarding screens"
+          onPress={() => setIsOnBoarding(true)}
+        />
       </AppBottomSheet>
     </ViewComponent>
   );
@@ -101,20 +106,6 @@ export const Playground = () => {
         </AppText>
         <AppButton title="Do action" />
       </AppCard>
-    </ViewComponent>
-  );
-
-  const AppCheckboxDemo = () => (
-    <ViewComponent>
-      <AppText fontSize={20} fontWeight={600} style={{ paddingBottom: 4 }}>
-        AppCheckbox
-      </AppText>
-      <AppCheckbox text="I am a checkbox" onPress={() => {}} />
-      <AppCheckbox
-        text="I aM a DiSaBLed ChecKBoX"
-        onPress={() => {}}
-        disabled
-      />
     </ViewComponent>
   );
 
@@ -227,7 +218,6 @@ export const Playground = () => {
         <AppBottomSheetDemo />
         <AppButtonDemo />
         <AppCardDemo />
-        <AppCheckboxDemo />
         <AppFABDemo />
         <AppIconButtonDemo />
         <AppSeparatorDemo />

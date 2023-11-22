@@ -8,11 +8,9 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AppBottomSheet } from "../components/AppBottomSheet";
-import { AppCheckbox } from "../components/AppCheckbox";
 import { AppScreen } from "../components/AppScreen";
 import { AppText } from "../components/AppText";
-import { JOKE_CATEGORIES, getDarkJoke } from "../helpers/getDarkJoke";
-import { capitalizeString } from "../helpers/capitalizeString";
+import { getJoke } from "../helpers/getJoke";
 import { showAppToast } from "../helpers/showAppToast";
 import { shareJoke } from "../helpers/shareJoke";
 import { Feather, FontAwesome } from "@expo/vector-icons";
@@ -24,6 +22,7 @@ import {
 } from "../state/globalStates";
 import { useTheme } from "@react-navigation/native";
 import { AppSeparator } from "../components/AppSeparator";
+import { CategoryChooser } from "../components/CategoryChooser";
 
 export const HomeScreen = ({ bottomSheetModalRef }) => {
   const [joke, setJoke] = useState({});
@@ -34,6 +33,7 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
 
   const [minimalMode] = useAtom(minimalModeAtom);
   const [categories, setCategories] = useAtom(categoriesAtom);
+  const isNoCategoriesChosen = categories.length === 0;
 
   const { colors } = useTheme();
 
@@ -41,13 +41,13 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
   const isAFavourite = favourites.some((fav) => fav.jokeId === joke.jokeId);
 
   useEffect(() => {
-    getJoke();
+    getRandomJoke();
   }, []);
 
   // functions
-  const getJoke = () => {
+  const getRandomJoke = () => {
     setIsLoading(true);
-    getDarkJoke(categories, isSafe)
+    getJoke(categories, isSafe)
       .then((value) => {
         setJoke({
           jokeId: value.jokeId,
@@ -158,7 +158,7 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
           color={isLoading ? colors.disabled : colors.white}
         />
       ),
-      onPress: getJoke,
+      onPress: getRandomJoke,
       primary: true,
     },
 
@@ -238,26 +238,11 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
           ))}
         </View>
       </AppScreen>
-      <AppBottomSheet sheetRef={bottomSheetModalRef}>
-        <View style={{ marginBottom: 8 }}>
-          <AppText fontSize={24}>Filter by category</AppText>
-        </View>
-        {JOKE_CATEGORIES.map((category, index) => {
-          return (
-            <AppCheckbox
-              text={
-                category === "misc"
-                  ? "Miscellaneous"
-                  : capitalizeString(category)
-              }
-              key={index}
-              onPress={(checked) => {
-                handleCheckboxPress(category, checked);
-              }}
-              isChecked={categories.find((element) => element === category)}
-            />
-          );
-        })}
+      <AppBottomSheet
+        sheetRef={bottomSheetModalRef}
+        isError={isNoCategoriesChosen}
+      >
+        <CategoryChooser />
         <AppSeparator />
         <View
           style={{

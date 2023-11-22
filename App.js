@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { ActivityIndicator } from "react-native";
-import { DarkJokesApp } from "./src/DarkJokesApp";
+import { LaughHubApp } from "./src/LaughHubApp";
 import { useTheme } from "@react-navigation/native";
 
 export default function App() {
@@ -8,7 +8,7 @@ export default function App() {
 
   return (
     <Suspense fallback={<ActivityIndicator color={colors.text} size="large" />}>
-      <DarkJokesApp />
+      <LaughHubApp />
     </Suspense>
   );
 }

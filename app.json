@@ -2,7 +2,7 @@
   "expo": {
     "name": "Dark Jokes",
     "slug": "dark-jokes",
-    "backgroundColor": "#151D29",
+    "backgroundColor": "#1D2125",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#151D29"
+      "backgroundColor": "#1D2125"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -19,7 +19,7 @@
       "splash": {
         "image": "./assets/splash.png",
         "resizeMode": "contain",
-        "backgroundColor": "#151D29"
+        "backgroundColor": "#1D2125"
       },
       "bundleIdentifier": "com.jadbarakat.darkjokes",
       "buildNumber": "5"
@@ -28,13 +28,13 @@
       "userInterfaceStyle": "automatic",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#151D29"
+        "backgroundColor": "#1D2125"
       },
       "package": "com.jadbarakat.darkjokes",
       "splash": {
         "image": "./assets/splash.png",
         "resizeMode": "contain",
-        "backgroundColor": "#151D29"
+        "backgroundColor": "#1D2125"
       },
       "versionCode": 5
     },
@@ -56,9 +56,6 @@
     ],
     "runtimeVersion": {
       "policy": "appVersion"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/d6f719dd-6b48-4206-8a03-c0ab1b2f36b3"
     }
   }
 }

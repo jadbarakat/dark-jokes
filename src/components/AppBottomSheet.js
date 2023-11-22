@@ -12,7 +12,12 @@ import { Feather } from "@expo/vector-icons";
 import { useAtom } from "jotai";
 import { isDarkAtom } from "../state/globalStates";
 
-export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
+export const AppBottomSheet = ({
+  children,
+  sheetRef,
+  onAnimate,
+  isError = false,
+}) => {
   const { colors } = useTheme();
   const { bottom } = useSafeAreaInsets();
   const [isDark] = useAtom(isDarkAtom);
@@ -33,6 +38,7 @@ export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
         opacity={isDark ? 0.8 : 0.5}
         disappearsOnIndex={-1}
         appearsOnIndex={0}
+        pressBehavior={isError ? "none" : "close"}
       />
     ),
     []
@@ -56,6 +62,7 @@ export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
       />
       <TouchableOpacity
         activeOpacity={0.85}
+        disabled={isError}
         onPress={handleCloseModal}
         style={{
           position: "absolute",
@@ -63,7 +70,11 @@ export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
           top: 16,
         }}
       >
-        <Feather name="x" size={24} color={colors.text} />
+        <Feather
+          name="x"
+          size={24}
+          color={isError ? colors.disabled : colors.text}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -81,6 +92,7 @@ export const AppBottomSheet = ({ children, sheetRef, onAnimate }) => {
       handleComponent={customHandleComponent}
       backdropComponent={renderBackdrop}
       onAnimate={onAnimate}
+      enablePanDownToClose={!isError}
     >
       <BottomSheetView
         style={{

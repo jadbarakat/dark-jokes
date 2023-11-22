@@ -5,19 +5,21 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { RootNav } from "./navigation/RootNav";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { useAtom } from "jotai";
-import { isDarkAtom, tintAtom } from "./state/globalStates";
+import { isDarkAtom, isOnboardingAtom, tintAtom } from "./state/globalStates";
 import { AppTheme } from "./styles/AppTheme";
+import { AppOnboarding } from "./components/AppOnboarding";
 
-export const DarkJokesApp = () => {
+export const LaughHubApp = () => {
   const [isDark] = useAtom(isDarkAtom);
   const [tint] = useAtom(tintAtom);
+  const [isOnboarding, setIsOnBoarding] = useAtom(isOnboardingAtom);
 
   return (
     <SafeAreaProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <NavigationContainer theme={AppTheme(tint)}>
           <BottomSheetModalProvider>
-            <RootNav />
+            {isOnboarding ? <AppOnboarding /> : <RootNav />}
           </BottomSheetModalProvider>
         </NavigationContainer>
         <StatusBar

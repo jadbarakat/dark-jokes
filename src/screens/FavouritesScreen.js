@@ -2,16 +2,9 @@ import { useCallback, useState } from "react";
 import { AppScreen } from "../components/AppScreen";
 import { AppCard } from "../components/AppCard";
 import { AppText } from "../components/AppText";
-import {
-  Alert,
-  Platform,
-  ScrollView,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Alert, Platform, ScrollView, View } from "react-native";
 import { useFocusEffect, useTheme } from "@react-navigation/native";
 import { useHeaderHeight } from "@react-navigation/elements";
-import { AppCheckbox } from "../components/AppCheckbox";
 import { showAppToast } from "../helpers/showAppToast";
 import { Feather } from "@expo/vector-icons";
 import { useAtom } from "jotai";
@@ -52,14 +45,14 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
         favouritesClone.splice(index, 1);
       }
     }
-    deleteAlert(() => {
+    removeFavouriteAlert(() => {
       setFavourites(favouritesClone);
       setIsEditing(false);
       showAppToast(
         "success",
         "Success",
         `${
-          favouritesToRemove.length < 2
+          favouritesToRemove.length === 1
             ? "Favourite removed."
             : "Favourites removed."
         }`
@@ -68,8 +61,13 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
     });
   };
 
-  const deleteAlert = (deleteFunction) =>
-    Alert.alert("Are you sure you want to do this?", null, [
+  const removeFavouriteAlert = (removeFavouriteFunction) => {
+    const response =
+      favouritesToRemove.length === 1
+        ? "Are you sure you want to remove this favourite?"
+        : "Are you sure you want to remove these favourites?";
+
+    Alert.alert(response, null, [
       {
         text: "Cancel",
         onPress: null,
@@ -77,10 +75,11 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
       },
       {
         text: "Delete",
-        onPress: deleteFunction,
+        onPress: removeFavouriteFunction,
         style: "destructive",
       },
     ]);
+  };
 
   // screen components
   const EmptyView = () => {
@@ -89,12 +88,15 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
         style={{
           flex: 1,
           justifyContent: "center",
-          alignItems: "center",
           marginBottom: headerHeight,
         }}
       >
         <AppCard padded>
-          <AppText>You have no favourite jokes saved.</AppText>
+          <View style={{ paddingVertical: 8 }}>
+            <AppText style={{ alignSelf: "center" }}>
+              You have no favourite jokes saved.
+            </AppText>
+          </View>
         </AppCard>
       </View>
     );
@@ -103,49 +105,36 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
   const LoadedView = () => {
     return orderedFavourites.map((favourite, index) =>
       isEditing ? (
-        <FavouritesEditingCard item={favourite} index={index} key={index} />
+        <FavouritesEditingCard item={favourite} key={index} />
       ) : (
         <FavouritesCard item={favourite} key={index} />
       )
     );
   };
 
-  const FavouritesCard = ({ item, onLongPress, disabled }) => {
+  const FavouritesCard = ({ item, disabled }) => {
     return (
-      <AppCard>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={() => shareJoke(item)}
-          onLongPress={onLongPress}
-          disabled={disabled}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              padding: 16,
-            }}
-          >
-            <View style={{ flex: 0.1, alignItems: "flex-start" }}>
-              <Feather
-                name={isAndroid ? "share-2" : "share"}
-                size={24}
-                color={colors.text}
-              />
-            </View>
-            <View style={{ flex: 0.9, paddingHorizontal: 8 }}>
-              {item.setup && <AppText>{item.setup}</AppText>}
-              <AppText fontWeight={item.setup ? 700 : 400}>
-                {item.delivery}
-              </AppText>
-            </View>
-          </View>
-        </TouchableOpacity>
+      <AppCard
+        onPress={() => shareJoke(item)}
+        disabled={disabled}
+        padded
+        rightComponent={
+          <Feather
+            name={isAndroid ? "share-2" : "share"}
+            size={24}
+            color={colors.text}
+          />
+        }
+      >
+        <View style={{ paddingLeft: 16 }}>
+          {item.setup && <AppText>{item.setup}</AppText>}
+          <AppText fontWeight={item.setup ? 700 : 400}>{item.delivery}</AppText>
+        </View>
       </AppCard>
     );
   };
 
-  const FavouritesEditingCard = ({ item, index }) => {
+  const FavouritesEditingCard = ({ item }) => {
     const [isChecked] = useState(
       favouritesToRemove.some((joke) => joke.jokeId === item.jokeId)
     );
@@ -159,37 +148,22 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
     };
 
     return (
-      <AppCard selected={isChecked}>
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={() => onCheckboxPress(item)}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              padding: 16,
-            }}
-          >
-            <View
-              style={{
-                flex: 0.1,
-              }}
-            >
-              <AppCheckbox
-                key={index}
-                onPress={() => onCheckboxPress(item)}
-                isChecked={isChecked}
-              />
-            </View>
-            <View style={{ flex: 0.9, paddingHorizontal: 8 }}>
-              {item.setup && <AppText>{item.setup}</AppText>}
-              <AppText fontWeight={item.setup ? 700 : 400}>
-                {item.delivery}
-              </AppText>
-            </View>
-          </View>
-        </TouchableOpacity>
+      <AppCard
+        onPress={() => onCheckboxPress(item)}
+        selected={isChecked}
+        padded
+        rightComponent={
+          isChecked ? (
+            <Feather name="check" size={24} color={colors.primary} />
+          ) : (
+            <Feather name="circle" size={24} color={colors.disabled} />
+          )
+        }
+      >
+        <View style={{ paddingLeft: 16 }}>
+          {item.setup && <AppText>{item.setup}</AppText>}
+          <AppText fontWeight={item.setup ? 700 : 400}>{item.delivery}</AppText>
+        </View>
       </AppCard>
     );
   };
