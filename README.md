@@ -30,8 +30,10 @@ Things that are next on my to-do list:
 Please note this is a project I worked on as a hobby to practice my development skills - still honing them 😀
 
 Screenshots:
-
 <div>
-
-
+  <img src="https://github.com/jadbarakat/laugh-hub/assets/68382811/57be867d-8102-458f-91b7-fdfd5af20f7a" width="40%" height="40%">
+  <img src="https://github.com/jadbarakat/laugh-hub/assets/68382811/f3c8232d-04a8-4c97-8aab-2fb7d4bccf9d" width="40%" height="40%">
+  <img src="https://github.com/jadbarakat/laugh-hub/assets/68382811/686f7622-df64-44ee-8921-e5f8927b024a" width="40%" height="40%">
+  <img src="https://github.com/jadbarakat/laugh-hub/assets/68382811/a3846e01-ca0a-41ae-87c2-6cfd12c338f2" width="40%" height="40%">
+  <img src="https://github.com/jadbarakat/laugh-hub/assets/68382811/e4c61a29-9396-4d21-a443-d3b7983c2f9a" width="40%" height="40%">
 </div>
