@@ -4,7 +4,6 @@ import { AppCard } from "../components/AppCard";
 import { AppText } from "../components/AppText";
 import { Alert, Platform, ScrollView, View } from "react-native";
 import { useFocusEffect, useTheme } from "@react-navigation/native";
-import { useHeaderHeight } from "@react-navigation/elements";
 import { showAppToast } from "../helpers/showAppToast";
 import { Feather } from "@expo/vector-icons";
 import { useAtom } from "jotai";
@@ -17,7 +16,6 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
   const { colors } = useTheme();
-  const headerHeight = useHeaderHeight();
   const [favourites, setFavourites] = useAtom(favouritesAtom);
   const [favouritesAscending] = useAtom(favouritesAscendingAtom);
   const [favouritesToRemove, setFavouritesToRemove] = useState([]);
@@ -88,7 +86,7 @@ export const FavouritesScreen = ({ isEditing, setIsEditing }) => {
         style={{
           flex: 1,
           justifyContent: "center",
-          marginBottom: headerHeight,
+          marginBottom: bottom,
         }}
       >
         <AppCard padded>

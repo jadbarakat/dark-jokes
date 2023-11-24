@@ -1,18 +1,20 @@
 {
   "expo": {
-    "name": "Dark Jokes",
-    "slug": "dark-jokes",
+    "name": "Laugh Hub",
+    "slug": "laugh-hub",
     "backgroundColor": "#1D2125",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#1D2125"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "userInterfaceStyle": "automatic",
       "supportsTablet": false,
@@ -21,8 +23,8 @@
         "resizeMode": "contain",
         "backgroundColor": "#1D2125"
       },
-      "bundleIdentifier": "com.jadbarakat.darkjokes",
-      "buildNumber": "5"
+      "bundleIdentifier": "com.jadbarakat.laughhub",
+      "buildNumber": "1"
     },
     "android": {
       "userInterfaceStyle": "automatic",
@@ -30,20 +32,20 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1D2125"
       },
-      "package": "com.jadbarakat.darkjokes",
+      "package": "com.jadbarakat.laughhub",
       "splash": {
         "image": "./assets/splash.png",
         "resizeMode": "contain",
         "backgroundColor": "#1D2125"
       },
-      "versionCode": 5
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "d6f719dd-6b48-4206-8a03-c0ab1b2f36b3"
+        "projectId": "2ffe4ee0-6023-40a2-b86a-bfe784dd0efe"
       }
     },
     "plugins": [

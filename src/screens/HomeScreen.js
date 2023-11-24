@@ -80,12 +80,6 @@ export const HomeScreen = ({ bottomSheetModalRef }) => {
       setFavourites((prev) => prev.filter((fav) => fav.jokeId !== joke.jokeId));
   };
 
-  const handleCheckboxPress = (flag, checked) => {
-    if (checked) setCategories(() => [...categories, flag]);
-    if (!checked)
-      setCategories(() => categories.filter((item) => item !== flag));
-  };
-
   // components
   const ActionButton = ({ icon, onPress, label, primary }) => (
     <TouchableOpacity
