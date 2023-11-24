@@ -25,12 +25,13 @@ Interesting dependencies:
 Things that are next on my to-do list:
 
 - Add theme event listener so changes to device theme affects the app as well
-- Make the blacklist filter preferences persist through sessions
+- ~~Make the blacklist filter preferences persist through sessions~~
 
 Please note this is a project I worked on as a hobby to practice my development skills - still honing them 😀
 
 Screenshots:
 
 <div>
-  
+
+
 </div>
