@@ -1,6 +1,6 @@
 import { useTheme } from "@react-navigation/native";
 import { useAtom } from "jotai";
-import { Image, SafeAreaView, View } from "react-native";
+import { Image, SafeAreaView, ScrollView, View } from "react-native";
 import { categoriesAtom, isOnboardingAtom } from "../state/globalStates";
 import { AppText } from "./AppText";
 import { CategoryChooser } from "./CategoryChooser";
@@ -21,24 +21,18 @@ export const AppOnboarding = () => {
         backgroundColor: colors.background,
       }}
     >
-      <View style={{ paddingHorizontal: 16 }}>
+      <ScrollView style={{ paddingHorizontal: 16 }}>
         <View
           style={{
             alignItems: "center",
-            paddingVertical: 8,
           }}
         >
           <Image
             source={require("../../assets/adaptive-icon.png")}
             style={{ height: 90, width: 90 }}
           />
-          <AppText style={{ textAlign: "center" }}>
-            Welcome to the best Jokes app! Choose at least one category below
-            and enjoy!
-          </AppText>
         </View>
         <CategoryChooser />
-        <AppSeparator />
         <View style={{ paddingTop: 8 }}>
           <AppButton
             title="Done"
@@ -46,7 +40,7 @@ export const AppOnboarding = () => {
             disabled={isNoCategoriesSelected}
           />
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

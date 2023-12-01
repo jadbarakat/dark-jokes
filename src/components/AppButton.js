@@ -22,7 +22,7 @@ export const AppButton = ({
           ? color
           : colors.primary,
         height: 50,
-        borderRadius: noBorderRadius ? 0 : 4,
+        borderRadius: noBorderRadius ? 0 : 8,
         alignItems: "center",
         justifyContent: "center",
         borderWidth: 1,

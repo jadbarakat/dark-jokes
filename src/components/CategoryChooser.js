@@ -97,13 +97,13 @@ export const CategoryChooser = () => {
           </AppCard>
         );
       })}
-      <View style={{ height: 50, paddingTop: 8 }}>
-        {isNoneSelected && (
+      {isNoneSelected && (
+        <View style={{ height: 50, paddingTop: 8 }}>
           <AppText style={{ textAlign: "center" }} color={colors.danger}>
             Please choose at least one category
           </AppText>
-        )}
-      </View>
+        </View>
+      )}
     </View>
   );
 };
