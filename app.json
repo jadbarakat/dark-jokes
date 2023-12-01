@@ -12,9 +12,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#1D2125"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "userInterfaceStyle": "automatic",
       "supportsTablet": false,
@@ -24,7 +22,7 @@
         "backgroundColor": "#1D2125"
       },
       "bundleIdentifier": "com.jadbarakat.laughhub",
-      "buildNumber": "1"
+      "buildNumber": "2"
     },
     "android": {
       "userInterfaceStyle": "automatic",
