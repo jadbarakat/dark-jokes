@@ -1,7 +1,11 @@
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
+import { Platform, TouchableOpacity, View } from "react-native";
 import { AppText } from "./AppText";
-import { JOKE_CATEGORIES } from "../helpers/getJoke";
+import {
+  JOKE_CATEGORIES,
+  JOKE_CATEGORIES_ANDROID,
+  JOKE_CATEGORIES_IOS,
+} from "../helpers/getJoke";
 import { categoriesAtom } from "../state/globalStates";
 import { useAtom } from "jotai";
 import { AppCard } from "./AppCard";
@@ -12,6 +16,13 @@ import { useTheme } from "@react-navigation/native";
 export const CategoryChooser = () => {
   const { colors } = useTheme();
   const [categories, setCategories] = useAtom(categoriesAtom);
+
+  const isAndroid = Platform.OS === "android";
+
+  const JOKE_CATEGORIES = isAndroid
+    ? JOKE_CATEGORIES_ANDROID
+    : JOKE_CATEGORIES_IOS;
+
   const isNoneSelected = categories.length === 0;
   const isAllSelected = categories.length === JOKE_CATEGORIES.length;
 

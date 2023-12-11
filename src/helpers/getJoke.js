@@ -35,19 +35,18 @@ export const getJoke = async (categories, isSafe) => {
   }
 };
 
-export const JOKE_FLAGS = [
-  "nsfw",
-  "religious",
-  "political",
-  "racist",
-  "sexist",
-  "explicit",
-];
-
-export const JOKE_CATEGORIES = [
+export const JOKE_CATEGORIES_ANDROID = [
   "programming",
   "misc",
   "dark",
+  "pun",
+  "spooky",
+  "christmas",
+];
+
+export const JOKE_CATEGORIES_IOS = [
+  "programming",
+  "misc",
   "pun",
   "spooky",
   "christmas",
