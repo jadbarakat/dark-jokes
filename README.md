@@ -19,7 +19,7 @@ Interesting dependencies:
 - [expo](https://docs.expo.dev/)
 - [react-navigation](https://reactnavigation.org/)
 - [jotai](https://jotai.org/)
-- [gorhom/bottom-sheet](https://gorhom.github.io/react-native-bottom-sheet/)
+- [gorhom/bottom-sheet](https://ui.gorhom.dev/components/bottom-sheet)
 - [react-native-toast-message](https://www.npmjs.com/package/react-native-toast-message)
 
 Things that are next on my to-do list:
